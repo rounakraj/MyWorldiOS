@@ -337,6 +337,7 @@ extension NewPostViewController : UIImagePickerControllerDelegate,UINavigationCo
                 print("Video Selected")
                   if let pickedVideo:URL = (info[UIImagePickerControllerMediaURL] as? URL) {
                     
+                    print("Video Selected")
                     let videoData = try? Data(contentsOf: pickedVideo)
                     let paths = NSSearchPathForDirectoriesInDomains(
                         FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)

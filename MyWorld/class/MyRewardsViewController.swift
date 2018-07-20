@@ -87,7 +87,7 @@ class MyRewardsViewController: UIViewController,UITableViewDataSource{
         let msgString = String(format: "Hey,\n Check out My World application. \nhttps://play.google.com/store/apps/details?id=com.app.shopchatmyworldra \n Invitee Email: %@",emailID )
         print("MsgString: \(msgString)")
         let attachment = (data: UIImagePNGRepresentation(#imageLiteral(resourceName: "logo")),fileName:"logo.png")
-        YMSocialShare.shareOnMessanger(recipients:"","", subject:"MyWorld Invite", body:msgString ,attachment:attachment)
+        YMSocialShare.shareOn(serviceType: .otherApps, text: msgString, url: "http://www.myworld.com", image:#imageLiteral(resourceName: "logo"))
     }
     
     @IBAction func pressInviteFriends(_ sender: Any) {

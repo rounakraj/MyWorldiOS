@@ -295,7 +295,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,GIDSignInDelegate,SWReveal
         _ application: UIApplication,
         didReceiveRemoteNotification userInfo: [AnyHashable : Any],
         fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-        print(userInfo)
+        print(userInfo.description)
         let aps = userInfo["aps"] as! [String: AnyObject]
         print(aps["content-available"] as? Int)
         if aps["content-available"] as? Int == 1 {

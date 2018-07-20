@@ -938,7 +938,7 @@ class MyPosts: UIViewController,UITableViewDataSource,UITableViewDelegate,UINavi
                     })
                 }else{
                     DispatchQueue.main.async(execute: {
-                        let alertController = UIAlertController(title: "Haultips", message: data .value(forKey: "responseMessage") as? String, preferredStyle: .alert)
+                        let alertController = UIAlertController(title: "Error", message: data .value(forKey: "responseMessage") as? String, preferredStyle: .alert)
                         let ok = UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in
                             // Do whatever you want with inputTextField?.text
                             

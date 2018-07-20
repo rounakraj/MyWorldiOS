@@ -162,7 +162,7 @@ DCPathButtonDelegate,UIImagePickerControllerDelegate,UINavigationControllerDeleg
                 
             }]];
             
-            [actionSheet addAction:[UIAlertAction actionWithTitle:@"Cencel" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+            [actionSheet addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
                 
                 // OK button tapped.
                 

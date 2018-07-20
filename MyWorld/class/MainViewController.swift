@@ -628,6 +628,7 @@ class MainViewController: UIViewController,UICollectionViewDelegate,UINavigation
     @IBAction func socialBannerAction(_ sender: Any) {
         let MainStoryboard:UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
         let desCV = MainStoryboard.instantiateViewController(withIdentifier: "FriendsListViewController") as! FriendsListViewController
+        desCV.userId = UserDefaults.standard.value(forKey: "userId") as! String
         self.navigationController?.pushViewController(desCV, animated: true)
     }
     
@@ -676,6 +677,7 @@ extension MainViewController:MenuDelegate{
             
             let MainStoryboard:UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
             let desCV = MainStoryboard.instantiateViewController(withIdentifier: "FriendsListViewController") as! FriendsListViewController
+            desCV.userId = UserDefaults.standard.value(forKey: "userId") as! String
             self.navigationController?.pushViewController(desCV, animated: true)
         }
         if index == 5
@@ -755,6 +757,7 @@ extension MainViewController:BootomDelegate{
         
         let MainStoryboard:UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
         let controller = MainStoryboard.instantiateViewController(withIdentifier: "FriendsListViewController") as! FriendsListViewController
+        controller.userId = UserDefaults.standard.value(forKey: "userId") as! String
         self.navigationController?.pushViewController(controller, animated: true)
     }
     

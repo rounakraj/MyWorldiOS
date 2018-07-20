@@ -194,6 +194,7 @@ class ProfileViewController: UIViewController,UITableViewDataSource,UITableViewD
             if indexPath.section == 1{
                 let MainStoryboard:UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
                 let desCV = MainStoryboard.instantiateViewController(withIdentifier: "FriendsListViewController") as! FriendsListViewController
+                desCV.userId = UserDefaults.standard.value(forKey: "userId") as! String
                 self.navigationController?.pushViewController(desCV, animated: true)
             }
             if indexPath.section == 3{
@@ -234,6 +235,7 @@ class ProfileViewController: UIViewController,UITableViewDataSource,UITableViewD
             if indexPath.section == 1{
                 let MainStoryboard:UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
                 let desCV = MainStoryboard.instantiateViewController(withIdentifier: "FriendsListViewController") as! FriendsListViewController
+                desCV.userId = UserDefaults.standard.value(forKey: "userId") as! String
                 self.navigationController?.pushViewController(desCV, animated: true)
             }
             if indexPath.section == 4{

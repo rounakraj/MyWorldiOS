@@ -227,6 +227,7 @@ class HomeVC: UIViewController ,UITableViewDataSource,UITableViewDelegate{
             print("I am CLicked 4\n")
             let MainStoryboard:UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
             let desCV = MainStoryboard.instantiateViewController(withIdentifier: "FriendsListViewController") as! FriendsListViewController
+            desCV.userId = UserDefaults.standard.value(forKey: "userId") as! String
             self.navigationController?.pushViewController(desCV, animated: true)
             
         }else if indexPath.section == 5 {
@@ -243,6 +244,7 @@ class HomeVC: UIViewController ,UITableViewDataSource,UITableViewDelegate{
         let indexPath = self.tableView.indexPathForRow(at: buttonPosition)
         let MainStoryboard:UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
         let desCV = MainStoryboard.instantiateViewController(withIdentifier: "FriendsListViewController") as! FriendsListViewController
+        desCV.userId = UserDefaults.standard.value(forKey: "userId") as! String
         self.navigationController?.pushViewController(desCV, animated: true)
     }
     
@@ -661,6 +663,7 @@ extension HomeVC:MenuDelegate{
             
             let MainStoryboard:UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
             let desCV = MainStoryboard.instantiateViewController(withIdentifier: "FriendsListViewController") as! FriendsListViewController
+            desCV.userId = UserDefaults.standard.value(forKey: "userId") as! String
             self.navigationController?.pushViewController(desCV, animated: true)
         }
         if index == 5

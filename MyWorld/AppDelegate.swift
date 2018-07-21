@@ -296,9 +296,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate,GIDSignInDelegate,SWReveal
         didReceiveRemoteNotification userInfo: [AnyHashable : Any],
         fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         print(userInfo.description)
-        let aps = userInfo["aps"] as! [String: AnyObject]
-        print(aps["content-available"] as? Int)
-        if aps["content-available"] as? Int == 1 {
+        //let aps = userInfo["aps"] as! [String: AnyObject]
+        //print(aps["content-available"] as? Int)
+        
+        let Type = (userInfo["aps"] as! NSDictionary).object(forKey: "title") as! String
+        print ("Type is:" + Type)
+        if Type == "user" || Type == "admin" || Type == "accept" || Type == "request"{
             let Notification_Msg =  (userInfo["aps"] as! NSDictionary).object(forKey: "alert") as! String
             let Notification_Type = (userInfo["aps"] as! NSDictionary).object(forKey: "title") as! String
             let User_Id = (userInfo["aps"] as! NSDictionary).object(forKey: "userId2") as! String

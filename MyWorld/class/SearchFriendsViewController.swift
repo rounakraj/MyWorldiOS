@@ -39,7 +39,6 @@ class SearchFriendsViewController: UIViewController, UITableViewDataSource,UITab
     func validateFriendList(UserId:String,searchKeydata:String) {
         let userId = UserId
         let searchKeydata = searchKeydata
-        //self.activityindicator.startAnimating();
         let urlToRequest = WEBSERVICE_URL+"searchUsers.php"
         let url4 = URL(string: urlToRequest)!
         let session4 = URLSession.shared
@@ -122,7 +121,7 @@ class SearchFriendsViewController: UIViewController, UITableViewDataSource,UITab
         
          cell.btnInvite.layer.borderWidth = 0.8
         cell.btnInvite.layer.borderColor = UIColor.gray.cgColor
-        if User[indexPath.row].IsInVited == "No"{
+        if User[indexPath.row].is_invited == "No"{
             cell.btnInvite.setTitle("Invite friend", for: .normal)
         }
         else{

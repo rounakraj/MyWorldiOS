@@ -2108,7 +2108,7 @@
                                 <rect key="frame" x="0.0" y="-24" width="414" height="88"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Rewards" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2vV-B7-KRO">
-                                        <rect key="frame" x="106" y="56" width="204" height="22"/>
+                                        <rect key="frame" x="106" y="55.999999999999993" width="204" height="21.666666666666664"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -9574,9 +9574,6 @@
         <image name="wishlist" width="16" height="16"/>
         <namedColor name="Appcolor">
             <color red="0.1000000015" green="0.38600000740000001" blue="0.74599999189999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="Appcolor">
-            <color red="0.10000000149011612" green="0.38600000739097595" blue="0.74599999189376831" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="tabBackgroundColor">
             <color red="0.0" green="0.41200000047683716" blue="0.85100001096725464" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

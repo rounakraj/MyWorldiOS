@@ -21,7 +21,7 @@ class NewPostViewController: UIViewController{
      var imageData = NSData()
      let picker = UIImagePickerController()   //our controller.
     var from = String()
-    var videoURL = NSData()
+    var videoesData = NSData()
     var isBoxclickde:Bool!
     let saveFileName = "/myworld.mp4"
     @IBAction func btnBackpress(_ sender: Any) {
@@ -70,7 +70,6 @@ class NewPostViewController: UIViewController{
     
     
     @IBAction func shareFacebook(_ sender: Any) {
-        print("share button pressed")
         
        /* let content : FBSDKShareLinkContent = FBSDKShareLinkContent()
         content.contentURL = NSURL(string: "") as URL!
@@ -146,8 +145,6 @@ class NewPostViewController: UIViewController{
             picker.sourceType = UIImagePickerControllerSourceType.camera
             picker.cameraCaptureMode = .photo
             picker.modalPresentationStyle = .fullScreen
-            picker.mediaTypes = ["public.image"]
-            
             present(picker,
                     animated: true,
                     completion: nil)
@@ -156,7 +153,7 @@ class NewPostViewController: UIViewController{
         }
     }
     func SendDataToServerUpdateUserStatus() -> Void {
-        if self.imageData.length == 0 && self.videoURL == nil && self.txtStatus.text?.count == 0{
+        if self.imageData.length == 0 && self.videoesData.length == 0  && self.txtStatus.text?.count == 0{
             SVProgressHUD.showInfo(withStatus: "Please select image/video/Status")
             return
         }
@@ -165,20 +162,16 @@ class NewPostViewController: UIViewController{
         SVProgressHUD.show(withStatus: "Loading")
         
         Alamofire.upload(multipartFormData: { (multipartFormData) in
-            if self.imageData.length == 0 {
-                
-            }else{
-                
-                if self.imageData.length > 0 {
-                    multipartFormData.append(self.imageData as Data, withName: "userFile", fileName: "\(Date().timeIntervalSince1970).jpeg", mimeType: "image/jpeg")
-                }else{
-                    multipartFormData.append(self.videoURL as Data, withName: "userFile", fileName: "\(Date().timeIntervalSince1970).mp4", mimeType: "video/mp4")
-
-                }
+            if self.imageData.length > 0 {
+                 multipartFormData.append(self.imageData as Data, withName: "userFile", fileName: "\(Date().timeIntervalSince1970).jpeg", mimeType: "image/jpeg")
+            }
+            if self.videoesData.length > 0 {
+                    multipartFormData.append(self.videoesData as Data, withName: "userFile", fileName: "\(Date().timeIntervalSince1970).mp4", mimeType: "video/mp4")
                 
             }
-            for (key, value) in param {
                 
+            
+            for (key, value) in param {
                 multipartFormData.append(((value as AnyObject).data(using: String.Encoding.utf8.rawValue)!), withName: key )
                 
             }
@@ -244,7 +237,7 @@ class NewPostViewController: UIViewController{
     
     func SendDataToServerUpdateGlobalStatus() -> Void {
         
-        if self.imageData.length == 0 && self.videoURL == nil && self.txtStatus.text?.count == 0{
+        if self.imageData.length == 0 && self.videoesData.length == 0 && self.txtStatus.text?.count == 0{
             SVProgressHUD.showInfo(withStatus: "Please select image/video/Status")
             return
         }
@@ -252,15 +245,15 @@ class NewPostViewController: UIViewController{
 
        SVProgressHUD.show(withStatus: "Loading")
         Alamofire.upload(multipartFormData: { (multipartFormData) in
-            if self.imageData.length == 0 {
-                
-            }else{
-                if self.imageData.length > 0{
+           
+            if self.imageData.length > 0 {
                 multipartFormData.append(self.imageData as Data, withName: "globalFile", fileName: "\(Date().timeIntervalSince1970).jpeg", mimeType: "image/jpeg")
-                }else{
-                    multipartFormData.append(self.videoURL as Data, withName: "globalFile", fileName: "\(Date().timeIntervalSince1970).mp4", mimeType: "video/mp4")
-                }
             }
+            if self.videoesData.length > 0 {
+                multipartFormData.append(self.videoesData as Data, withName: "globalFile", fileName: "\(Date().timeIntervalSince1970).mp4", mimeType: "video/mp4")
+                
+            }
+            
             for (key, value) in param {
                 
                 multipartFormData.append(((value as AnyObject).data(using: String.Encoding.utf8.rawValue)!), withName: key )
@@ -337,16 +330,16 @@ extension NewPostViewController : UIImagePickerControllerDelegate,UINavigationCo
                 print("Video Selected")
                   if let pickedVideo:URL = (info[UIImagePickerControllerMediaURL] as? URL) {
                     
-                    print("Video Selected")
+                    // Save the video to the app directory so we can play it later
                     let videoData = try? Data(contentsOf: pickedVideo)
                     let paths = NSSearchPathForDirectoriesInDomains(
                         FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)
                     let documentsDirectory: URL = URL(fileURLWithPath: paths[0])
                     let dataPath = documentsDirectory.appendingPathComponent(saveFileName)
                     try! videoData?.write(to: dataPath, options: [])
-                    videoURL = try!NSData(contentsOf: pickedVideo as URL)
+                    videoesData = try!NSData(contentsOf: pickedVideo as URL)
+                    print("Saved to " + dataPath.absoluteString)
                 
-                //videoURL = info[UIImagePickerControllerMediaURL] as? URL
                 }
             }else{
                 let chosenImage = info[UIImagePickerControllerOriginalImage] as! UIImage //2

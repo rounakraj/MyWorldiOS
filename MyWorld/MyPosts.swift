@@ -29,7 +29,6 @@ class MyPosts: UIViewController,UITableViewDataSource,UITableViewDelegate,UINavi
     override func viewDidLoad() {
         super.viewDidLoad()
         picker.delegate = self
-        //getMyProfileDetailData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -337,13 +336,12 @@ class MyPosts: UIViewController,UITableViewDataSource,UITableViewDelegate,UINavi
             cell.postImageTextView.isUserInteractionEnabled = false
             cell.postImageView.isUserInteractionEnabled = false
             cell.shareContentBtn.isHidden = true
-
+            cell.reportContentBtn.isHidden = true
+            
             if let profileImage = self.detailsDict.value(forKey: "profileImage") as? String {
                 cell.updatesProfileImage.sd_setImage(with: URL(string:profileImage), placeholderImage:UIImage(named: "ic_profile"))
             }
-          
             cell.updateUserName.text = UserDefaults.standard.string(forKey: "firstName")!+" "+UserDefaults.standard.string(forKey: "lastName")!
-
             
             if let userTime = self.detailsDict.value(forKey: "userTime") as? String {
                 cell.updateDate.text = userTime
@@ -438,9 +436,11 @@ class MyPosts: UIViewController,UITableViewDataSource,UITableViewDelegate,UINavi
             let tapGesture2 = UITapGestureRecognizer(target: self, action: #selector(MyPosts.imagePreview(_:)))
             cell.postImageView.isUserInteractionEnabled = true
             cell.postImageView.addGestureRecognizer(tapGesture2)
-            
             cell.inviteBtn.isHidden = true
-            cell.shareContentBtn.isHidden = false
+            
+            cell.shareContentBtn.isHidden = true
+            cell.reportContentBtn.isHidden = true
+
             cell.shareContentBtn.addTarget(self, action: #selector(shareContentAction(sender:)), for: .touchUpInside)
             
             var dict = NSDictionary()
@@ -548,7 +548,11 @@ class MyPosts: UIViewController,UITableViewDataSource,UITableViewDelegate,UINavi
             cell.inviteBtn.layer.borderColor = UIColor.gray.cgColor
             cell.inviteBtn.addTarget(self, action: #selector(selectAction(sender:)), for: .touchUpInside)
             cell.inviteBtn.isHidden = false
+
             cell.shareContentBtn.addTarget(self, action: #selector(shareContentAction(sender:)), for: .touchUpInside)
+            
+            cell.reportContentBtn.addTarget(self, action: #selector(shareContentAction(sender:)), for: .touchUpInside)
+            
             
             var dict = NSDictionary()
             dict = shareUpdateArray[indexPath.row] as! NSDictionary
@@ -560,7 +564,16 @@ class MyPosts: UIViewController,UITableViewDataSource,UITableViewDelegate,UINavi
             }
             
             if let profileImage = dict.value(forKey: "profileImage") as? String {
-                cell.updatesProfileImage.sd_setImage(with: URL(string:profileImage), placeholderImage: UIImage(named: "ic_profile"))
+                //cell.updatesProfileImage.sd_setImage(with: URL(string:profileImage), placeholderImage: UIImage(named: "ic_profile"))
+                
+                
+                if (profileImage.hasPrefix("graph")){
+                    if let imageURL = URL(string: "https://"+profileImage){
+                        cell.updatesProfileImage.sd_setImage(with: imageURL, placeholderImage: UIImage(named: "ic_profile"))
+                    }
+                }else{
+                    cell.updatesProfileImage.sd_setImage(with: URL(string: profileImage), placeholderImage: UIImage(named: "ic_profile"))
+                }
             }
             if let userName = dict.value(forKey: "userName") as? String {
                 print("Test = \(userName)")
@@ -572,6 +585,18 @@ class MyPosts: UIViewController,UITableViewDataSource,UITableViewDelegate,UINavi
             else{
                  cell.updateDate.text = ""
             }
+            let globalFile = dict.object(forKey: "globalFile") as! String
+
+            if globalFile.isEmpty{
+                cell.shareContentBtn.isHidden = true
+                cell.reportContentBtn.isHidden = true
+
+            }else{
+                cell.shareContentBtn.isHidden = false
+                cell.reportContentBtn.isHidden = false
+
+            }
+
             if let userFile = dict.value(forKey: "globalFile") as? String, let userStatus = dict.value(forKey: "globalStatus") as? String {
                 if userFile.count > 0 && userStatus.count > 0{
                     if userFile.characters.last! == "4" {
@@ -585,6 +610,7 @@ class MyPosts: UIViewController,UITableViewDataSource,UITableViewDelegate,UINavi
                             cell.imageTextVideoBackView.addSubview(myCustomView!) // you can omit 'self' here
                             cell.imageTextVideoBackView.isHidden = false
                             cell.postImageTextView.isHidden = true
+
                         }
                     }
                     else {
@@ -592,6 +618,7 @@ class MyPosts: UIViewController,UITableViewDataSource,UITableViewDelegate,UINavi
                         cell.postImageTextView.sd_setImage(with: URL(string:userFile), placeholderImage:#imageLiteral(resourceName: "menutop"))
                         cell.imageTextVideoBackView.isHidden = true
                         cell.postImageTextView.isHidden = false
+
                     }
                     cell.imageBackView.isHidden = true
                     cell.videoBackView.isHidden = true;
@@ -610,6 +637,7 @@ class MyPosts: UIViewController,UITableViewDataSource,UITableViewDelegate,UINavi
                             cell.imageBackView.isHidden = true
                             cell.videoBackView.isHidden = false;
                             cell.imageTextBackView.isHidden = true;
+                           
                         }
                     }
                     else {
@@ -634,6 +662,7 @@ class MyPosts: UIViewController,UITableViewDataSource,UITableViewDelegate,UINavi
                     cell.imageBackView.isHidden = true
                     cell.videoBackView.isHidden = true;
                     cell.imageTextBackView.isHidden = true;
+
                 }
             }
         }
@@ -721,7 +750,6 @@ class MyPosts: UIViewController,UITableViewDataSource,UITableViewDelegate,UINavi
     }
     
    func validatesendfriendRequest(emailId:String) {
-        //self.activityindicator.startAnimating();
         let UserId = UserDefaults.standard.value(forKey: "userId") as! String
         let urlToRequest = WEBSERVICE_URL+"sendfriendRequest.php"
         let url4 = URL(string: urlToRequest)!
@@ -1107,21 +1135,7 @@ class MyPosts: UIViewController,UITableViewDataSource,UITableViewDelegate,UINavi
         let cropVC = PKCCropViewController(image, tag: 1)
         cropVC.delegate = self
         picker.pushViewController(cropVC, animated: true)
-       /* let chosenImage = info[UIImagePickerControllerOriginalImage] as! UIImage //2
-        let index = IndexPath.init(row: 0, section: 0)
-        let cell = tableView.cellForRow(at:index) as! MyPostTVC
-        if isProfileUpdate {
-            cell.profileImage.contentMode = .scaleAspectFill //3
-            cell.profileImage.image = chosenImage
-            imageData = (cell.profileImage.image?.lowestQualityJPEGNSData)!
-        }
-        else{
-            cell.profileBackGroundImage.contentMode = .scaleAspectFill //3
-            cell.profileBackGroundImage.image = chosenImage
-            imageData = (cell.profileBackGroundImage.image?.lowestQualityJPEGNSData)!
-        }
-        SendDataToServer()
-        dismiss(animated:true, completion: nil) */
+    
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -1210,7 +1224,105 @@ class MyPosts: UIViewController,UITableViewDataSource,UITableViewDelegate,UINavi
         
     }
     
+    @objc func sendMessage(sender: UIButton){
+        
+        let buttonPosition:CGPoint = sender.convert(CGPoint.zero, to:self.tableView)
+        let indexPath = self.tableView.indexPathForRow(at: buttonPosition)
+        let cell = self.tableView.cellForRow(at: indexPath!) as! MyPostTVC
+        var dict = NSDictionary()
+        dict = shareUpdateArray[(indexPath?.row)!] as! NSDictionary
+        
+        
+        let alertController = UIAlertController(title: "MyWorld", message: "Send Message", preferredStyle: .alert)
+        let send = UIAlertAction(title: "Send", style: UIAlertActionStyle.default) { UIAlertAction in
+            let textField = alertController.textFields![0]
+            print(textField.text!)
+            if !self.isKeyboardDismiss && textField.text!.count > 0{
+                let dic = ["login_user_id" : UserDefaults.standard.string(forKey: "userId")!,
+                           "block_user_id" : dict.object(forKey: "userId") as! String,
+                           "report" : "1",
+                           "report_text" : textField.text!]  as [String : Any]
+                self.sendDataToServerUsingWrongContent(param:dic)
+            }
+            else{
+                self.isKeyboardDismiss = false
+            }
+        }
+        alertController.addAction(send)
+        
+        alertController .addTextField { (textField) in
+            textField.placeholder = "message"
+            textField.keyboardType = .default
+            textField.delegate = self
+        }
+        self.present(alertController, animated: true, completion:{
+            alertController.view.superview?.isUserInteractionEnabled = true
+            alertController.view.superview?.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(MyPosts.alertClose(gesture:))))
+        })
+    }
     
+    
+    
+    func sendDataToServerUsingWrongContent(param:[String:Any]){
+        
+        SVProgressHUD.show(withStatus: "Loading")
+        
+        Alamofire.upload(multipartFormData: { (multipartFormData) in
+            
+            for (key, value) in param {
+                
+                multipartFormData.append(((value as AnyObject).data(using: String.Encoding.utf8.rawValue)!), withName: key )
+                
+            }
+            
+        }, to: WEBSERVICE_URL + "blockAndReport.php")
+        { (result) in
+            switch result {
+            case .success(let upload, _, _):
+                
+                upload.uploadProgress(closure: { (progress) in
+                    //Print progress
+                    print("progress \(progress) " )
+                    
+                })
+                
+                upload.responseJSON { response in
+                    //print response.result
+                    print("response data \(response) " )
+                    let jsonResponse = response.result.value as! NSDictionary
+                    if jsonResponse.value(forKey: "responseCode") as! String == "200"{
+                        let alertController = UIAlertController(title: "Image", message: jsonResponse.value(forKey: "responseMessage") as? String, preferredStyle: .alert)
+                        SVProgressHUD.dismiss()
+                        let ok = UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in
+                            // Do whatever you want with inputTextField?.text
+                            self.viewWillAppear(true)
+                        })
+                        alertController.addAction(ok)
+                        self.present(alertController, animated: true, completion: nil)
+                        
+                    }else{
+                        DispatchQueue.main.async(execute: {
+                            let alertController = UIAlertController(title: "Image", message: jsonResponse.value(forKey: "responseMessage") as? String, preferredStyle: .alert)
+                            SVProgressHUD.dismiss()
+                            let ok = UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in
+                                // Do whatever you want with inputTextField?.text
+                                self.navigationController?.popViewController(animated:true)
+                            })
+                            alertController.addAction(ok)
+                            self.present(alertController, animated: true, completion: nil)
+                        })
+                    }
+                    
+                }
+                
+            case .failure( _):
+                SVProgressHUD.dismiss()
+                break
+                //print encodingError.description
+                
+            }
+        }
+    }
     
     
 }

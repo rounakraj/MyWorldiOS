@@ -25,9 +25,9 @@ class SerchFriends: Codable {
     let profileImage:String
     let userId:String
     let userStatus:String
-    let IsInVited:String
+    let is_invited:String
     
-    init (emailId:String,firstName:String,lastName:String,mobileNo:String,onlineFlag:String,profileImage:String,userId:String,userStatus:String,IsInVited:String)
+    init (emailId:String,firstName:String,lastName:String,mobileNo:String,onlineFlag:String,profileImage:String,userId:String,userStatus:String,is_invited:String)
     {
         self.emailId = emailId
         self.firstName = firstName
@@ -37,7 +37,7 @@ class SerchFriends: Codable {
         self.profileImage = profileImage
         self.userId = userId
         self.userStatus = userStatus
-        self.IsInVited = IsInVited
+        self.is_invited = is_invited
     }
 
 }

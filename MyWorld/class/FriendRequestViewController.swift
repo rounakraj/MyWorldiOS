@@ -245,12 +245,7 @@ class FriendRequestViewController: UIViewController,UITableViewDataSource,UITabl
                 let checkcode="200"
                 if responseCode==checkcode{
                     self.navigationController?.popViewController(animated: true)
-                    /*DispatchQueue.main.async { // Correct
-                        let alertController = UIAlertController(title: "My World", message: messageFromServer, preferredStyle: .alert)
-                        let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-                        alertController.addAction(defaultAction)
-                        self.present(alertController, animated: true, completion: nil)
-                    }*/
+                    
                 }else{
                     let alertController = UIAlertController(title: "My World", message: messageFromServer, preferredStyle: .alert)
                     let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
@@ -273,6 +268,7 @@ class FriendRequestViewController: UIViewController,UITableViewDataSource,UITabl
     
     func validateAcceptfriendRequest(UserId1:String) {
         SVProgressHUD.show(withStatus: "Loading")
+        
         let userId = UserDefaults.standard.value(forKey: "userId") as! String
         let urlToRequest = WEBSERVICE_URL+"acceptfriendRequest.php"
         let url4 = URL(string: urlToRequest)!
@@ -299,16 +295,14 @@ class FriendRequestViewController: UIViewController,UITableViewDataSource,UITabl
                 let Data = try JSONSerialization.jsonObject(with: data!) as! [String:Any]
                 print("*****Response \(String(describing: Data))") //JSONSerialization
                 let  messageFromServer = Data["responseMessage"] as? String
-                let responseCode=Data["responseCode"] as? String
+                let responseCode = Data["responseCode"] as? String
                 let checkcode="200"
+
                 if responseCode==checkcode{
-                    self.navigationController?.popViewController(animated: true)
-                    /*DispatchQueue.main.async { // Correct
-                        let alertController = UIAlertController(title: "My World", message: messageFromServer, preferredStyle: .alert)
-                        let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-                        alertController.addAction(defaultAction)
-                        self.present(alertController, animated: true, completion: nil
-                    })*/
+                     DispatchQueue.main.async {
+                        
+                    self.navigationController?.popViewController(animated:true)
+                    }
                 }else{
                     let alertController = UIAlertController(title: "My World", message: messageFromServer, preferredStyle: .alert)
                     let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)

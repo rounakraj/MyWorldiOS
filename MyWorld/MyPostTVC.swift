@@ -20,7 +20,6 @@ class MyPostTVC: UITableViewCell {
     @IBOutlet weak var updateUserName: UILabel!
     @IBOutlet weak var updateDate: UILabel!
     @IBOutlet weak var username: UILabel!
-    @IBOutlet weak var shareBtn: UIButton!
 
     @IBOutlet weak var videoBackView: UIView!
     @IBOutlet weak var imageBackView: UIView!
@@ -33,7 +32,7 @@ class MyPostTVC: UITableViewCell {
 
     @IBOutlet weak var shareContentBtn: UIButton!
     
-    
+    @IBOutlet weak var reportContentBtn: UIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()

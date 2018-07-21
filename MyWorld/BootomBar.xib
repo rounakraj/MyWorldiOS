@@ -12,18 +12,18 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleAspectFill" id="iN0-l3-epB" customClass="BootomBar" customModule="MyWorld" customModuleProvider="target">
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="BootomBar" customModule="MyWorld" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="lV8-Ea-kIa">
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="lV8-Ea-kIa">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                     <subviews>
                         <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="mQc-lD-F3o">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                             <items>
                                 <barButtonItem style="plain" id="HTk-B7-rJQ">
-                                    <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="cAr-rM-kHw">
+                                    <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="cAr-rM-kHw">
                                         <rect key="frame" x="16" y="3.5" width="73" height="37"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" image="chatbutton"/>
@@ -34,8 +34,8 @@
                                 </barButtonItem>
                                 <barButtonItem style="plain" systemItem="flexibleSpace" id="Wx2-bf-7vv"/>
                                 <barButtonItem style="plain" id="3JF-Cl-Db6">
-                                    <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="iOf-7f-29p">
-                                        <rect key="frame" x="104" y="3.5" width="73" height="37"/>
+                                    <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="iOf-7f-29p">
+                                        <rect key="frame" x="94" y="3.5" width="73" height="37"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" image="contacts-1"/>
                                         <connections>
@@ -45,8 +45,8 @@
                                 </barButtonItem>
                                 <barButtonItem style="plain" systemItem="flexibleSpace" id="tVQ-Ph-d4y"/>
                                 <barButtonItem style="plain" id="Oh1-NX-zle">
-                                    <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="O8o-bq-Vke">
-                                        <rect key="frame" x="192" y="3.5" width="51" height="37"/>
+                                    <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="O8o-bq-Vke">
+                                        <rect key="frame" x="172" y="3.5" width="60" height="37"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" image="globlecamera"/>
                                         <connections>
@@ -57,7 +57,7 @@
                                 <barButtonItem style="plain" systemItem="flexibleSpace" id="yvm-QT-I3u"/>
                                 <barButtonItem style="plain" id="1SF-x0-vdu">
                                     <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="CKx-Kx-R9i">
-                                        <rect key="frame" x="258" y="3.5" width="36" height="37"/>
+                                        <rect key="frame" x="237" y="3.5" width="73" height="37"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" image="ic_X"/>
                                         <connections>
@@ -68,7 +68,7 @@
                                 <barButtonItem style="plain" systemItem="flexibleSpace" id="bdv-Kc-0U4"/>
                                 <barButtonItem style="plain" id="zyf-Df-BFe">
                                     <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" lineBreakMode="middleTruncation" id="oxb-Te-Vcn">
-                                        <rect key="frame" x="309" y="0.0" width="50" height="44"/>
+                                        <rect key="frame" x="315" y="0.0" width="44" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <state key="normal" image="mm"/>
                                         <connections>
@@ -80,7 +80,11 @@
                         </toolbar>
                     </subviews>
                     <constraints>
+                        <constraint firstItem="mQc-lD-F3o" firstAttribute="top" secondItem="lV8-Ea-kIa" secondAttribute="top" id="SRl-FN-cZc"/>
+                        <constraint firstItem="mQc-lD-F3o" firstAttribute="leading" secondItem="lV8-Ea-kIa" secondAttribute="leading" id="cfU-2i-iF0"/>
+                        <constraint firstAttribute="bottom" secondItem="mQc-lD-F3o" secondAttribute="bottom" id="grh-jz-4Vm"/>
                         <constraint firstAttribute="height" constant="44" id="jgW-cd-SEu"/>
+                        <constraint firstAttribute="trailing" secondItem="mQc-lD-F3o" secondAttribute="trailing" id="kGm-Gy-erX"/>
                     </constraints>
                 </stackView>
             </subviews>

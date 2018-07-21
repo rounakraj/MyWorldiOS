@@ -47,6 +47,7 @@ class ProfileViewController: UIViewController,UITableViewDataSource,UITableViewD
     
     
     @IBAction func btnRequest(_ sender: Any) {
+        
         let MainStoryboard:UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
         let desCV = MainStoryboard.instantiateViewController(withIdentifier: "FriendRequestViewController") as! FriendRequestViewController
         desCV.userId = self.userId
@@ -66,7 +67,7 @@ class ProfileViewController: UIViewController,UITableViewDataSource,UITableViewD
     
      @objc func btnBlockSwitch(_ sender: Any) {
         let dic = ["login_user_id" : UserDefaults.standard.string(forKey: "userId")!,
-                   "block_user_id" : UserDefaults.standard.string(forKey: "userId")!]  as [String : Any]
+                   "block_user_id" : self.userId]  as [String : Any]
         
         self.sendDataToServerUsingWrongContent(param:dic)
     }
@@ -269,8 +270,13 @@ class ProfileViewController: UIViewController,UITableViewDataSource,UITableViewD
     }
     
     func getUpdatesDetailData() -> Void {
+        let UserId = UserDefaults.standard.value(forKey: "userId") as! String
+
         let actInd: UIActivityIndicatorView = UIActivityIndicatorView()
+        //let postData = NSMutableData(data: "userId=\(UserId)".data(using: String.Encoding.utf8)!)
+        
         let postData = NSMutableData(data: "userId=\(self.userId)".data(using: String.Encoding.utf8)!)
+        postData.append("&login_user_id=\(UserId)".data(using: String.Encoding.utf8)!)
         
         ApiManager.getData(paramValue: postData as NSMutableData, isactivity: true, apiName: "getprofileInfo.php", uiView: self.view, withCompletionHandler: {data,error in
             if error != nil {
@@ -303,7 +309,6 @@ class ProfileViewController: UIViewController,UITableViewDataSource,UITableViewD
                             
                         } else if value is NSArray {
                             print("It's an NSArray")
-                            //self.shareUpdateArray = value as! NSArray
                             
                         }
                         self.lblFollowerscount.text = data.value(forKey: "followers") as? String
@@ -318,7 +323,18 @@ class ProfileViewController: UIViewController,UITableViewDataSource,UITableViewD
                         }else{
                             cell.switchBtn.isOn = true
                         }
-                        
+                        let indexPath1 = IndexPath(row: 0, section: 3)
+                        let cell1 = self.tableView.cellForRow(at: indexPath1) as! MyAccountTVC
+                        if self.userId == UserDefaults.standard.value(forKey: "userId") as! String{
+                        }else{
+                            if data .value(forKey: "is_block") as! String == "No"{
+                                cell1.blockSwitchBtn.isOn = false
+                            }else{
+                                cell1.blockSwitchBtn.isOn = true
+                                
+                            }
+                        }
+                    
                     })
                 }else{
                     DispatchQueue.main.async(execute: {
@@ -351,7 +367,7 @@ class ProfileViewController: UIViewController,UITableViewDataSource,UITableViewD
             print(textField.text!)
             if !self.isKeyboardDismiss && textField.text!.count > 0{
                 let dic = ["login_user_id" : UserDefaults.standard.string(forKey: "userId")!,
-                           "block_user_id" : UserDefaults.standard.string(forKey: "userId")!,
+                           "block_user_id" : self.userId,
                            "report" : "1",
                            "report_text" : textField.text!]  as [String : Any]
                 self.sendDataToServerUsingWrongContent(param:dic)

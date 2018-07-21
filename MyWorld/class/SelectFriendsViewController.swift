@@ -16,8 +16,9 @@ class SelectFriendsViewController: UIViewController,UITableViewDelegate,UITableV
     
     @IBOutlet weak var btnBackground: UIView!
     private var friendList = [ChatFriendList]()
-     var StringBuilder = String()
+    var StringBuilder = String()
     var allUserId = String()
+     var UserId = String()
     @IBAction func btnBackPress(_ sender: Any) {
         
         navigationController?.popViewController(animated:true)
@@ -38,16 +39,16 @@ class SelectFriendsViewController: UIViewController,UITableViewDelegate,UITableV
     @IBAction func btnActionButton(_ sender: Any) {
         
         for word in friendList {
-            print(">>>>>>>>",word.userId)
-            
             StringBuilder.append(word.userId);
             StringBuilder.append(",");
         }
         
-       allUserId = StringBuilder.substring(to: StringBuilder.endIndex)
-        
+        allUserId =  String(StringBuilder.dropLast())
+        UserId = UserDefaults.standard.value(forKey: "userId") as! String
         SendDataToServerUpdateGlobalStatus()
         print(">>>>>>>>",allUserId)
+        print(">>>>>>>>UserId",UserId)
+
     }
    
     
@@ -158,9 +159,8 @@ class SelectFriendsViewController: UIViewController,UITableViewDelegate,UITableV
     
     func SendDataToServerUpdateGlobalStatus() -> Void {
         
-        let param = ["userId" : UserDefaults.standard.string(forKey: "userId"),
+        let param = ["userId1" : UserId,
                      "alluserId":allUserId]
-        
         SVProgressHUD.show(withStatus: "Loading")
         Alamofire.upload(multipartFormData: { (multipartFormData) in
           

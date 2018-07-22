@@ -71,15 +71,8 @@ class NewPostViewController: UIViewController{
     
     @IBAction func shareFacebook(_ sender: Any) {
         
-       /* let content : FBSDKShareLinkContent = FBSDKShareLinkContent()
-        content.contentURL = NSURL(string: "") as URL!
-        let shareDialog = FBSDKShareDialog()
-        shareDialog.mode = .automatic
-        shareDialog.shareContent = content
-        shareDialog.show()
-        print(txtStatus.text)
-        //YMSocialShare.shareOn(serviceType:.otherApps,text:"Checkout My World application. Download from Android PlayStore or iOS Appstore",image:#imageLiteral(resourceName: "logo"))*/
-        let photo : FBSDKSharePhoto = FBSDKSharePhoto()
+   // YMSocialShare.shareOn(serviceType: .otherApps, text: "Shared from MyWorld App!", url: <#T##String?#>, image: <#T##UIImage?#>)
+       /* let photo : FBSDKSharePhoto = FBSDKSharePhoto()
         photo.image = imgePostImageView.image
         photo.isUserGenerated = true
         let content : FBSDKSharePhotoContent = FBSDKSharePhotoContent()
@@ -87,8 +80,11 @@ class NewPostViewController: UIViewController{
         let shareDialog = FBSDKShareDialog()
         shareDialog.mode = .automatic
         shareDialog.shareContent = content
-        shareDialog.show()
+        shareDialog.show()*/
     }
+    
+    
+    
     
     @objc func takePhotoAction() {
        
@@ -339,6 +335,8 @@ extension NewPostViewController : UIImagePickerControllerDelegate,UINavigationCo
                     try! videoData?.write(to: dataPath, options: [])
                     videoesData = try!NSData(contentsOf: pickedVideo as URL)
                     print("Saved to " + dataPath.absoluteString)
+                    imgePostImageView.contentMode = .scaleAspectFill //
+                    imgePostImageView.image = UIImage(named: "icon02")
                 
                 }
             }else{

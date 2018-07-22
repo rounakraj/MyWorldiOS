@@ -44,7 +44,8 @@ class MenuViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         super.viewWillAppear(true)
         lblEmailId.text = UserDefaults.standard.value(forKey: "EmailId") as? String
         let profileImg = UserDefaults.standard.value(forKey: "profileImage") as! String
-        if profileImg.hasPrefix("graph"){
+        print(profileImg)
+        if profileImg.contains("https://graph"){
             print("Facebook")
             if profileImg.hasPrefix("https"){
                 print("Facebook without http")

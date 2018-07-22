@@ -75,6 +75,9 @@ class MyPosts: UIViewController,UITableViewDataSource,UITableViewDelegate,UINavi
         if indexPath.section == 4{
           obj.urlStr = (shareUpdateArray[indexPath.row] as! NSDictionary).object(forKey: "globalFile") as? String
         }
+        if indexPath.section == 2{
+            obj.urlStr = detailsDict.object(forKey: "userFile") as? String
+        }
         self.isImageZoomed = true
         self.navigationController?.pushViewController(obj, animated: false)
     }
@@ -99,38 +102,14 @@ class MyPosts: UIViewController,UITableViewDataSource,UITableViewDelegate,UINavi
         let cell = self.tableView.cellForRow(at: indexPath as IndexPath) as! MyPostTVC
         let dic = NSDictionary()
         print("Test =\(indexPath)")
-        if indexPath.section == 3{
+        if indexPath.section == 3 || indexPath.section == 2 {
             print("Test = \(networkUpdateArray[indexPath.row] as! NSDictionary)")
             let dic = networkUpdateArray[indexPath.row] as! NSDictionary
-            let file = dic.object(forKey: "globalFile") as? NSString
+            let file = dic.object(forKey: "userFile") as? NSString
             if file == ""{
-                let content : FBSDKShareLinkContent = FBSDKShareLinkContent()
-                content.quote = dic.object(forKey: "globalStatus") as! String
-                let shareDialog = FBSDKShareDialog()
-                shareDialog.mode = .automatic
-                shareDialog.shareContent = content
-                shareDialog.show()
-            }
-            else{
-                if file?.pathExtension == "jpeg" ||  file?.pathExtension == "jpg"{
-                    let photo : FBSDKSharePhoto = FBSDKSharePhoto()
-                    photo.image = cell.postImageView.image == nil ? cell.postImageTextView.image :   cell.postImageView.image
-                    photo.isUserGenerated = true
-                    let content : FBSDKSharePhotoContent = FBSDKSharePhotoContent()
-                    content.photos = [photo]
-                    let shareDialog = FBSDKShareDialog()
-                    shareDialog.mode = .automatic
-                    shareDialog.shareContent = content
-                    shareDialog.show()
-                }
-                else{
-                    let content = FBSDKShareLinkContent()
-                    content.quote = dic.object(forKey: "globalStatus") as! String
-                    let shareDialog = FBSDKShareDialog()
-                    shareDialog.mode = .automatic
-                    shareDialog.shareContent = content
-                    shareDialog.show()
-                }
+                
+            }else{
+               YMSocialShare.shareOn(serviceType: .otherApps, text: "Media Shared from Myworld!", url: file as! String, image: (#imageLiteral(resourceName: "logo")))
             }
         }
         if indexPath.section == 4 {
@@ -138,33 +117,10 @@ class MyPosts: UIViewController,UITableViewDataSource,UITableViewDelegate,UINavi
             let dic = shareUpdateArray[indexPath.row] as! NSDictionary
             let file = dic.object(forKey: "globalFile") as? NSString
             if file == ""{
-                 let content : FBSDKShareLinkContent = FBSDKShareLinkContent()
-                 content.quote = dic.object(forKey: "globalStatus") as! String
-                 let shareDialog = FBSDKShareDialog()
-                 shareDialog.mode = .automatic
-                 shareDialog.shareContent = content
-                 shareDialog.show()
+                
             }
             else{
-                if file?.pathExtension == "jpeg" ||  file?.pathExtension == "jpg"{
-                    let photo : FBSDKSharePhoto = FBSDKSharePhoto()
-                    photo.image = cell.postImageView.image == nil ? cell.postImageTextView.image :   cell.postImageView.image
-                    photo.isUserGenerated = true
-                    let content : FBSDKSharePhotoContent = FBSDKSharePhotoContent()
-                    content.photos = [photo]
-                    let shareDialog = FBSDKShareDialog()
-                    shareDialog.mode = .automatic
-                    shareDialog.shareContent = content
-                    shareDialog.show()
-                }
-                else{
-                    let content = FBSDKShareLinkContent()
-                    content.quote = dic.object(forKey: "globalStatus") as! String
-                    let shareDialog = FBSDKShareDialog()
-                    shareDialog.mode = .automatic
-                    shareDialog.shareContent = content
-                    shareDialog.show()
-                }
+                YMSocialShare.shareOn(serviceType: .otherApps, text: "Shared from Myworld!", url: file as! String, image: (#imageLiteral(resourceName: "logo")))
             }
         }
     }
@@ -301,6 +257,8 @@ class MyPosts: UIViewController,UITableViewDataSource,UITableViewDelegate,UINavi
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cell = MyPostTVC()
+        SDImageCache.shared().clearMemory()
+        SDImageCache.shared().clearDisk()
         if indexPath.section == 0 {
             print("0")
             cell = tableView.dequeueReusableCell(withIdentifier: "profile", for: indexPath) as! MyPostTVC
@@ -315,7 +273,7 @@ class MyPosts: UIViewController,UITableViewDataSource,UITableViewDelegate,UINavi
                 UserDefaults.standard.set(profileImage, forKey: "profileImage")
             }
             if let coverImage = self.detailsDict.value(forKey: "coverImage") as? String {
-                cell.profileBackGroundImage.sd_setImage(with: URL(string:coverImage), placeholderImage:#imageLiteral(resourceName: "menutop"))
+                cell.profileBackGroundImage.sd_setImage(with: URL(string:coverImage), placeholderImage:#imageLiteral(resourceName: "dropshadow_top"))
             }
             cell.username.text = UserDefaults.standard.string(forKey: "firstName")!+" "+UserDefaults.standard.string(forKey: "lastName")!
         }
@@ -333,10 +291,14 @@ class MyPosts: UIViewController,UITableViewDataSource,UITableViewDelegate,UINavi
             cell.updatesProfileImage.layer.borderColor = UIColor.white.cgColor
             cell.updatesProfileImage.isUserInteractionEnabled = false
             cell.inviteBtn.isHidden = true
-            cell.postImageTextView.isUserInteractionEnabled = false
-            cell.postImageView.isUserInteractionEnabled = false
-            cell.shareContentBtn.isHidden = true
-            cell.reportContentBtn.isHidden = true
+            
+            
+            let tapGesture1 = UITapGestureRecognizer(target: self, action: #selector(MyPosts.imagePreview(_:)))
+            cell.postImageTextView.isUserInteractionEnabled = true
+            cell.postImageTextView.addGestureRecognizer(tapGesture1)
+            let tapGesture2 = UITapGestureRecognizer(target: self, action: #selector(MyPosts.imagePreview(_:)))
+            cell.postImageView.isUserInteractionEnabled = true
+            cell.postImageView.addGestureRecognizer(tapGesture2)
             
             if let profileImage = self.detailsDict.value(forKey: "profileImage") as? String {
                 cell.updatesProfileImage.sd_setImage(with: URL(string:profileImage), placeholderImage:UIImage(named: "ic_profile"))
@@ -350,6 +312,20 @@ class MyPosts: UIViewController,UITableViewDataSource,UITableViewDelegate,UINavi
             {
                 cell.updateDate.text = ""
             }
+            let userFile = detailsDict.object(forKey: "userFile") as! String
+            
+            if userFile.isEmpty{
+                cell.shareContentBtn.isHidden = true
+                cell.reportContentBtn.isHidden = true
+                
+            }else{
+                cell.shareContentBtn.isHidden = false
+                cell.reportContentBtn.isHidden = true
+                
+            }
+            cell.shareContentBtn.addTarget(self, action: #selector(shareContentAction(sender:)), for: .touchUpInside)
+            
+            cell.reportContentBtn.addTarget(self, action: #selector(sendMessage(sender:)), for: .touchUpInside)
             
             if let userFile = self.detailsDict.value(forKey: "userFile") as? String,
                 let userStatus = self.detailsDict.value(forKey: "userStatus") as? String {
@@ -370,7 +346,7 @@ class MyPosts: UIViewController,UITableViewDataSource,UITableViewDelegate,UINavi
                     }else {
                         
                         cell.postTextView.text = userStatus
-                        cell.postImageTextView.sd_setImage(with: URL(string:userFile), placeholderImage:#imageLiteral(resourceName: "menutop"))
+                        cell.postImageTextView.sd_setImage(with: URL(string:userFile), placeholderImage:#imageLiteral(resourceName: "dropshadow_top"))
                         cell.imageTextVideoBackView.isHidden = true
                         cell.postImageTextView.isHidden = false
                     }
@@ -396,7 +372,8 @@ class MyPosts: UIViewController,UITableViewDataSource,UITableViewDelegate,UINavi
                     }
                     else {
                         cell.postTextView.text = userStatus
-                        cell.postImageView.sd_setImage(with: URL(string:userFile), placeholderImage:#imageLiteral(resourceName: "menutop"))
+                        cell.postImageView.sd_setImage(with: URL(string:userFile), placeholderImage:#imageLiteral(resourceName: "dropshadow_top"))
+                    
                         cell.imageBackView.isHidden = false
                         cell.videoBackView.isHidden = true;
                         cell.imageTextBackView.isHidden = true;
@@ -438,9 +415,6 @@ class MyPosts: UIViewController,UITableViewDataSource,UITableViewDelegate,UINavi
             cell.postImageView.addGestureRecognizer(tapGesture2)
             cell.inviteBtn.isHidden = true
             
-            cell.shareContentBtn.isHidden = true
-            cell.reportContentBtn.isHidden = true
-
             cell.shareContentBtn.addTarget(self, action: #selector(shareContentAction(sender:)), for: .touchUpInside)
             
             var dict = NSDictionary()
@@ -461,6 +435,20 @@ class MyPosts: UIViewController,UITableViewDataSource,UITableViewDelegate,UINavi
             else{
                 cell.updateDate.text = ""
             }
+            let userFile = dict.object(forKey: "userFile") as! String
+            
+            if userFile.isEmpty{
+                cell.shareContentBtn.isHidden = true
+                cell.reportContentBtn.isHidden = true
+                
+            }else{
+                cell.shareContentBtn.isHidden = false
+                cell.reportContentBtn.isHidden = false
+                
+            }
+            cell.shareContentBtn.addTarget(self, action: #selector(shareContentAction(sender:)), for: .touchUpInside)
+            
+            cell.reportContentBtn.addTarget(self, action: #selector(sendMessage(sender:)), for: .touchUpInside)
             
             if let userFile = dict.value(forKey: "userFile") as? String, let userStatus = dict.value(forKey: "userStatus") as? String {
                 if userFile.count > 0 && userStatus.count > 0{
@@ -478,7 +466,7 @@ class MyPosts: UIViewController,UITableViewDataSource,UITableViewDelegate,UINavi
                         }
                     }else {
                         cell.postTextView.text = userStatus
-                        cell.postImageTextView.sd_setImage(with: URL(string:userFile), placeholderImage:#imageLiteral(resourceName: "menutop"))
+                        cell.postImageTextView.sd_setImage(with: URL(string:userFile), placeholderImage:#imageLiteral(resourceName: "dropshadow_top"))
                         cell.imageTextVideoBackView.isHidden = true
                         cell.postImageTextView.isHidden = false
                     }
@@ -502,7 +490,7 @@ class MyPosts: UIViewController,UITableViewDataSource,UITableViewDelegate,UINavi
                         }
                     }else {
                         cell.postTextView.text = userStatus
-                        cell.postImageView.sd_setImage(with: URL(string:userFile), placeholderImage:#imageLiteral(resourceName: "menutop"))
+                        cell.postImageView.sd_setImage(with: URL(string:userFile), placeholderImage:#imageLiteral(resourceName: "dropshadow_top"))
                         cell.imageBackView.isHidden = false
                         cell.videoBackView.isHidden = true;
                         cell.imageTextBackView.isHidden = true;
@@ -549,11 +537,6 @@ class MyPosts: UIViewController,UITableViewDataSource,UITableViewDelegate,UINavi
             cell.inviteBtn.addTarget(self, action: #selector(selectAction(sender:)), for: .touchUpInside)
             cell.inviteBtn.isHidden = false
 
-            cell.shareContentBtn.addTarget(self, action: #selector(shareContentAction(sender:)), for: .touchUpInside)
-            
-            cell.reportContentBtn.addTarget(self, action: #selector(shareContentAction(sender:)), for: .touchUpInside)
-            
-            
             var dict = NSDictionary()
             dict = shareUpdateArray[indexPath.row] as! NSDictionary
             if dict.object(forKey: "is_invited") as! String == "No"{
@@ -596,7 +579,10 @@ class MyPosts: UIViewController,UITableViewDataSource,UITableViewDelegate,UINavi
                 cell.reportContentBtn.isHidden = false
 
             }
-
+            cell.shareContentBtn.addTarget(self, action: #selector(shareContentAction(sender:)), for: .touchUpInside)
+            
+            cell.reportContentBtn.addTarget(self, action: #selector(sendMessage(sender:)), for: .touchUpInside)
+            
             if let userFile = dict.value(forKey: "globalFile") as? String, let userStatus = dict.value(forKey: "globalStatus") as? String {
                 if userFile.count > 0 && userStatus.count > 0{
                     if userFile.characters.last! == "4" {
@@ -615,7 +601,7 @@ class MyPosts: UIViewController,UITableViewDataSource,UITableViewDelegate,UINavi
                     }
                     else {
                         cell.postTextView.text = userStatus
-                        cell.postImageTextView.sd_setImage(with: URL(string:userFile), placeholderImage:#imageLiteral(resourceName: "menutop"))
+                        cell.postImageTextView.sd_setImage(with: URL(string:userFile), placeholderImage:#imageLiteral(resourceName: "dropshadow_top"))
                         cell.imageTextVideoBackView.isHidden = true
                         cell.postImageTextView.isHidden = false
 
@@ -643,7 +629,7 @@ class MyPosts: UIViewController,UITableViewDataSource,UITableViewDelegate,UINavi
                     else {
                         cell.postTextView.text = userStatus
                         print("Image = \(userFile)")
-                        cell.postImageView.sd_setImage(with: URL(string:userFile), placeholderImage:#imageLiteral(resourceName: "menutop"))
+                        cell.postImageView.sd_setImage(with: URL(string:userFile), placeholderImage:#imageLiteral(resourceName: "dropshadow_top"))
                         cell.imageBackView.isHidden = false
                         cell.videoBackView.isHidden = true;
                         cell.imageTextBackView.isHidden = true;
@@ -812,7 +798,6 @@ class MyPosts: UIViewController,UITableViewDataSource,UITableViewDelegate,UINavi
     }
     
     func unInvitefriendRequest(userID2:String) {
-        //self.activityindicator.startAnimating();
         let UserId = UserDefaults.standard.value(forKey: "userId") as! String
         let urlToRequest = WEBSERVICE_URL+"unInvite.php"
         let url4 = URL(string: urlToRequest)!
@@ -966,7 +951,7 @@ class MyPosts: UIViewController,UITableViewDataSource,UITableViewDelegate,UINavi
                     })
                 }else{
                     DispatchQueue.main.async(execute: {
-                        let alertController = UIAlertController(title: "Error", message: data .value(forKey: "responseMessage") as? String, preferredStyle: .alert)
+                        let alertController = UIAlertController(title: "Haultips", message: data .value(forKey: "responseMessage") as? String, preferredStyle: .alert)
                         let ok = UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in
                             // Do whatever you want with inputTextField?.text
                             

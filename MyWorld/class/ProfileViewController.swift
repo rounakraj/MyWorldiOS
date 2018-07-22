@@ -101,7 +101,7 @@ class ProfileViewController: UIViewController,UITableViewDataSource,UITableViewD
     // MARK: - Table view data source
     func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return self.userId == UserDefaults.standard.value(forKey: "userId") as! String ? 6:8
+        return self.userId == UserDefaults.standard.value(forKey: "userId") as! String ? 6:7 //6:8
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -164,8 +164,7 @@ class ProfileViewController: UIViewController,UITableViewDataSource,UITableViewD
             else if indexPath.section == 4 {
                 cell = (tableView.dequeueReusableCell(withIdentifier: "cell4", for: indexPath) as! MyAccountTVC)
                 cell?.reportSwitchBtn.isHidden = true
-                //cell?.reportSwitchBtn.addTarget(self, action: #selector(btnReportSwitch(_:)), for: .valueChanged)
-                
+               
             }
             else if indexPath.section == 5 {
                 cell = (tableView.dequeueReusableCell(withIdentifier: "cell5", for: indexPath) as! MyAccountTVC)
@@ -174,9 +173,9 @@ class ProfileViewController: UIViewController,UITableViewDataSource,UITableViewD
             else if indexPath.section == 6 {
                 cell = (tableView.dequeueReusableCell(withIdentifier: "cell6", for: indexPath) as! MyAccountTVC)
             }
-            else if indexPath.section == 7 {
+           /* else if indexPath.section == 7 {
                 cell = (tableView.dequeueReusableCell(withIdentifier: "cell7", for: indexPath) as! MyAccountTVC)
-            }
+            }*/
         }
         return cell!
     }
@@ -195,7 +194,6 @@ class ProfileViewController: UIViewController,UITableViewDataSource,UITableViewD
             if indexPath.section == 1{
                 let MainStoryboard:UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
                 let desCV = MainStoryboard.instantiateViewController(withIdentifier: "FriendsListViewController") as! FriendsListViewController
-                desCV.userId = UserDefaults.standard.value(forKey: "userId") as! String
                 self.navigationController?.pushViewController(desCV, animated: true)
             }
             if indexPath.section == 3{
@@ -236,7 +234,6 @@ class ProfileViewController: UIViewController,UITableViewDataSource,UITableViewD
             if indexPath.section == 1{
                 let MainStoryboard:UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
                 let desCV = MainStoryboard.instantiateViewController(withIdentifier: "FriendsListViewController") as! FriendsListViewController
-                desCV.userId = UserDefaults.standard.value(forKey: "userId") as! String
                 self.navigationController?.pushViewController(desCV, animated: true)
             }
             if indexPath.section == 4{
@@ -259,13 +256,7 @@ class ProfileViewController: UIViewController,UITableViewDataSource,UITableViewD
                 let desCV = MainStoryboard.instantiateViewController(withIdentifier: "ContactusViewController") as! ContactusViewController
                 self.navigationController?.pushViewController(desCV, animated: true)
             }
-            if indexPath.section == 7{
-                print("Logout")
-                UserDefaults.standard.removeObject(forKey: "userId")
-                let MainStoryboard:UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-                let desCV = MainStoryboard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
-                self.navigationController?.pushViewController(desCV, animated: true)
-            }
+            
         }
     }
     

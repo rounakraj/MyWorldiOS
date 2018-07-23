@@ -39,7 +39,8 @@ class AdressViewController: UIViewController ,UITableViewDataSource,UITableViewD
         navigationController?.popViewController(animated:true)
     }
     override func viewDidAppear(_ animated: Bool) {
-        
+            super.viewDidAppear(true)
+            validateAddress(UserId: UserDefaults.standard.value(forKey: "userId") as! String)
     
     }
     

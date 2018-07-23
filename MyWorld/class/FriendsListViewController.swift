@@ -38,6 +38,7 @@ class FriendsListViewController: UIViewController,UITableViewDataSource,QRScanne
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        validateFriendList(UserId: self.userId)
         
     }
 

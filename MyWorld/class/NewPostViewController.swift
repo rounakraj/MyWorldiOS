@@ -275,7 +275,7 @@ class NewPostViewController: UIViewController{
                         DispatchQueue.main.async(execute: {
                             
                             SVProgressHUD.dismiss()
-                            let alertController = UIAlertController(title: "Image", message: jsonResponse.value(forKey: "responseMessage") as? String, preferredStyle: .alert)
+                            let alertController = UIAlertController(title: "Update Status", message: jsonResponse.value(forKey: "responseMessage") as? String, preferredStyle: .alert)
                             SVProgressHUD.dismiss()
                             let ok = UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in
                                 // Do whatever you want with inputTextField?.text

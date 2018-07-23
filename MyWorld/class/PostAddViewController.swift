@@ -642,7 +642,7 @@ class PostAddViewController: UIViewController, UINavigationControllerDelegate,UI
                     let jsonResponse = response.result.value as! NSDictionary
                     if jsonResponse.value(forKey: "responseCode") as! String == "200"{
                         DispatchQueue.main.async(execute: {
-                            let alertController = UIAlertController(title: "Image", message: jsonResponse.value(forKey: "responseMessage") as? String, preferredStyle: .alert)
+                            let alertController = UIAlertController(title: "Add Product", message: jsonResponse.value(forKey: "responseMessage") as? String, preferredStyle: .alert)
                            
                             let ok = UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in
                                 // Do whatever you want with inputTextField?.text

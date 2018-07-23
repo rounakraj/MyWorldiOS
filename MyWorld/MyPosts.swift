@@ -1174,7 +1174,7 @@ class MyPosts: UIViewController,UITableViewDataSource,UITableViewDelegate,UINavi
                     print("response data \(response) " )
                     let jsonResponse = response.result.value as! NSDictionary
                     if jsonResponse.value(forKey: "responseCode") as! String == "200"{
-                        let alertController = UIAlertController(title: "Image", message: jsonResponse.value(forKey: "responseMessage") as? String, preferredStyle: .alert)
+                        let alertController = UIAlertController(title: "Profile Image", message: jsonResponse.value(forKey: "responseMessage") as? String, preferredStyle: .alert)
                         SVProgressHUD.dismiss()
                         let ok = UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in
                             // Do whatever you want with inputTextField?.text
@@ -1185,7 +1185,7 @@ class MyPosts: UIViewController,UITableViewDataSource,UITableViewDelegate,UINavi
                         
                     }else{
                         DispatchQueue.main.async(execute: {
-                            let alertController = UIAlertController(title: "Image", message: jsonResponse.value(forKey: "responseMessage") as? String, preferredStyle: .alert)
+                            let alertController = UIAlertController(title: " Profile Image", message: jsonResponse.value(forKey: "responseMessage") as? String, preferredStyle: .alert)
                             SVProgressHUD.dismiss()
                             let ok = UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in
                                 // Do whatever you want with inputTextField?.text

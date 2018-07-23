@@ -105,7 +105,9 @@ class CartListViewController: UIViewController,UITableViewDataSource,UITableView
                 let responseCode=Data["responseCode"] as? String
                 let checkcode="200"
                 if responseCode==checkcode{
+                    DispatchQueue.main.async {
                     self.btnProceed.isHidden = false
+                    }
 
                     let decoder = JSONDecoder()
                     let  downloadcartList = try decoder.decode(CartLists.self, from: data!)

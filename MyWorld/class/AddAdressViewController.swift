@@ -100,6 +100,12 @@ class AddAdressViewController: UIViewController {
         
     }
     
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        super.viewDidLoad()
+        
+    }
     @IBAction func btnUpdateButton(_ sender: Any) {
         let userId = UserDefaults.standard.value(forKey: "userId") as! String
         let mobileNo = txtMobileFiled.text
@@ -186,15 +192,6 @@ class AddAdressViewController: UIViewController {
                 let checkcode="200"
                 if responseCode==checkcode{
                     
-                    let EmailId=Data["emailId"] as? String
-                    let userId=Data["userId"] as? String
-                    let otp=Data["otp"] as? String
-                    let userDefaults = UserDefaults.standard
-                    userDefaults.set(EmailId, forKey: "EmailId")
-                    userDefaults.set(userId, forKey: "userId")
-                    userDefaults.set(otp, forKey: "otp")
-                    userDefaults.synchronize()
-                    
                     DispatchQueue.main.async {
                         
                         // Create the alert controller
@@ -204,7 +201,7 @@ class AddAdressViewController: UIViewController {
                         let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) {
                             UIAlertAction in
                             NSLog("OK Pressed")
-                            self.backPressButton(self)
+                            self.navigationController?.popViewController(animated:true)
                         }
                         // Add the actions
                         alertController.addAction(okAction)

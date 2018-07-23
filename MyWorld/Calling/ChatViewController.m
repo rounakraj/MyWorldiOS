@@ -679,6 +679,7 @@
           if(self.audioData.length > 0){
               [formData appendPartWithFileData:self.audioData name:@"chatAudio" fileName:[NSString stringWithFormat:@"%f%s",[[NSDate date] timeIntervalSince1970],".mp3"] mimeType:@"m4a/mp3"];
               self.audioData = nil;
+               [SVProgressHUD show];
           }
         }
         else{

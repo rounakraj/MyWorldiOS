@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
+    <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -35,7 +35,7 @@
                                 <barButtonItem style="plain" systemItem="flexibleSpace" id="Wx2-bf-7vv"/>
                                 <barButtonItem style="plain" id="3JF-Cl-Db6">
                                     <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="iOf-7f-29p">
-                                        <rect key="frame" x="94" y="3.5" width="73" height="37"/>
+                                        <rect key="frame" x="90" y="3.5" width="73" height="37"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" image="contacts-1"/>
                                         <connections>
@@ -46,7 +46,7 @@
                                 <barButtonItem style="plain" systemItem="flexibleSpace" id="tVQ-Ph-d4y"/>
                                 <barButtonItem style="plain" id="Oh1-NX-zle">
                                     <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="O8o-bq-Vke">
-                                        <rect key="frame" x="172" y="3.5" width="60" height="37"/>
+                                        <rect key="frame" x="163.5" y="3.5" width="60" height="37"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" image="globlecamera"/>
                                         <connections>
@@ -54,10 +54,9 @@
                                         </connections>
                                     </button>
                                 </barButtonItem>
-                                <barButtonItem style="plain" systemItem="flexibleSpace" id="yvm-QT-I3u"/>
                                 <barButtonItem style="plain" id="1SF-x0-vdu">
                                     <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="CKx-Kx-R9i">
-                                        <rect key="frame" x="237" y="3.5" width="73" height="37"/>
+                                        <rect key="frame" x="223.5" y="3.5" width="55" height="37"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" image="ic_X"/>
                                         <connections>
@@ -65,10 +64,10 @@
                                         </connections>
                                     </button>
                                 </barButtonItem>
-                                <barButtonItem style="plain" systemItem="flexibleSpace" id="bdv-Kc-0U4"/>
+                                <barButtonItem style="plain" systemItem="flexibleSpace" id="yvm-QT-I3u"/>
                                 <barButtonItem style="plain" id="zyf-Df-BFe">
                                     <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" lineBreakMode="middleTruncation" id="oxb-Te-Vcn">
-                                        <rect key="frame" x="315" y="0.0" width="44" height="44"/>
+                                        <rect key="frame" x="279.5" y="3.5" width="79" height="37"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <state key="normal" image="mm"/>
                                         <connections>
@@ -76,6 +75,7 @@
                                         </connections>
                                     </button>
                                 </barButtonItem>
+                                <barButtonItem style="plain" systemItem="flexibleSpace" id="bdv-Kc-0U4"/>
                             </items>
                         </toolbar>
                     </subviews>
@@ -97,7 +97,7 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="ePK-tc-ewX"/>
-            <point key="canvasLocation" x="326" y="11"/>
+            <point key="canvasLocation" x="322.5" y="10"/>
         </view>
     </objects>
     <resources>

@@ -79,6 +79,12 @@ class SellUiViewController: UIViewController,UICollectionViewDelegate,UICollecti
         validateShowCart(UserId: UserDefaults.standard.value(forKey: "userId") as! String)
 
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        super.viewDidLoad()
+        
+    }
 
 
     func validateSell() {

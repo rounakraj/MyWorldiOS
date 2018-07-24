@@ -2676,11 +2676,6 @@
                                                                     <color key="textColor" red="0.92891609668731689" green="0.21953278779983521" blue="0.19875350594520569" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AEO-Nf-Fig">
-                                                                    <rect key="frame" x="337" y="15" width="25" height="25"/>
-                                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                                                                    <state key="normal" backgroundImage="delete"/>
-                                                                </button>
                                                                 <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z7L-g4-pjU">
                                                                     <rect key="frame" x="379" y="15" width="25" height="25"/>
                                                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
@@ -2721,7 +2716,6 @@
                                         <connections>
                                             <outlet property="btnCheckBox" destination="dDo-nn-47h" id="Pd1-I7-puP"/>
                                             <outlet property="btnDeleteButton" destination="Z7L-g4-pjU" id="kn1-wb-XV8"/>
-                                            <outlet property="btnEditButton" destination="AEO-Nf-Fig" id="pqH-JJ-KW8"/>
                                             <outlet property="lblAdress" destination="ko7-sN-dni" id="uae-aO-WAi"/>
                                             <outlet property="lblAdressName" destination="7a9-IP-DDf" id="XOP-kU-G4Z"/>
                                             <outlet property="lblDefault" destination="oUV-H1-vfj" id="UQx-Ij-x1h"/>
@@ -2834,11 +2828,6 @@
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bWM-Er-qgQ">
-                                                            <rect key="frame" x="293" y="14" width="20" height="20"/>
-                                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                                                            <state key="normal" backgroundImage="delete"/>
-                                                        </button>
                                                         <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5pS-jl-2oL">
                                                             <rect key="frame" x="329" y="8" width="2" height="30"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
@@ -2882,7 +2871,6 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="btnCheckBox" destination="C5g-HP-PYk" id="9Ng-lA-y3H"/>
-                                            <outlet property="btnDelete" destination="bWM-Er-qgQ" id="c3w-yn-0Fc"/>
                                             <outlet property="btnPencil" destination="uqY-k0-Xat" id="cjT-lv-pb3"/>
                                             <outlet property="lblAddress" destination="9nM-In-xPa" id="j4t-xe-UFU"/>
                                             <outlet property="lblNameAddress" destination="jiU-MW-w3v" id="vRd-Oz-2ce"/>
@@ -6525,24 +6513,24 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="iML-8a-QA2">
-                                                            <rect key="frame" x="25" y="41" width="325" height="93"/>
+                                                            <rect key="frame" x="25" y="41" width="325" height="131"/>
                                                             <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                         </textView>
                                                         <view alpha="0.69999999999999996" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iS7-Yo-rzQ">
-                                                            <rect key="frame" x="10" y="144" width="355" height="1"/>
+                                                            <rect key="frame" x="10" y="178" width="355" height="1"/>
                                                             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="1" id="oea-YT-p6i"/>
                                                             </constraints>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EIl-sr-kSD">
-                                                            <rect key="frame" x="0.0" y="155" width="375" height="70"/>
+                                                            <rect key="frame" x="0.0" y="180" width="375" height="45"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Share" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mCr-tj-ewf">
-                                                                    <rect key="frame" x="20" y="24" width="50" height="21"/>
+                                                                    <rect key="frame" x="20" y="24.666666666666686" width="50" height="21"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="21" id="9F4-TF-CbC"/>
                                                                         <constraint firstAttribute="width" constant="50" id="ZLA-6O-1Ya"/>
@@ -6574,9 +6562,9 @@
                                                             </subviews>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="height" constant="70" id="Lr1-Xa-Cef"/>
-                                                                <constraint firstItem="7Se-mk-PVc" firstAttribute="centerY" secondItem="EIl-sr-kSD" secondAttribute="centerY" id="PWE-fG-f55"/>
-                                                                <constraint firstItem="mCr-tj-ewf" firstAttribute="centerY" secondItem="EIl-sr-kSD" secondAttribute="centerY" id="aOi-4Z-nhL"/>
+                                                                <constraint firstAttribute="height" constant="45" id="Lr1-Xa-Cef"/>
+                                                                <constraint firstItem="7Se-mk-PVc" firstAttribute="centerY" secondItem="EIl-sr-kSD" secondAttribute="centerY" constant="12.5" id="PWE-fG-f55"/>
+                                                                <constraint firstItem="mCr-tj-ewf" firstAttribute="centerY" secondItem="EIl-sr-kSD" secondAttribute="centerY" constant="12.666666666666686" id="aOi-4Z-nhL"/>
                                                                 <constraint firstItem="7Se-mk-PVc" firstAttribute="leading" secondItem="mCr-tj-ewf" secondAttribute="trailing" id="jgt-ii-ME0"/>
                                                                 <constraint firstItem="mCr-tj-ewf" firstAttribute="leading" secondItem="EIl-sr-kSD" secondAttribute="leading" constant="20" id="mpk-Hz-Gpd"/>
                                                                 <constraint firstAttribute="trailing" secondItem="7Se-mk-PVc" secondAttribute="trailing" constant="20" id="w3X-uW-diV"/>
@@ -6591,11 +6579,11 @@
                                                         <constraint firstAttribute="bottom" secondItem="EIl-sr-kSD" secondAttribute="bottom" constant="20" id="HSo-zT-N4o"/>
                                                         <constraint firstAttribute="trailing" secondItem="iML-8a-QA2" secondAttribute="trailing" constant="25" id="KJo-AL-hM0"/>
                                                         <constraint firstAttribute="trailing" secondItem="EIl-sr-kSD" secondAttribute="trailing" id="Qzh-vp-zmF"/>
-                                                        <constraint firstItem="iS7-Yo-rzQ" firstAttribute="top" secondItem="iML-8a-QA2" secondAttribute="bottom" constant="10" id="WbP-58-GVo"/>
+                                                        <constraint firstItem="iS7-Yo-rzQ" firstAttribute="top" secondItem="iML-8a-QA2" secondAttribute="bottom" constant="6" id="WbP-58-GVo"/>
                                                         <constraint firstItem="iS7-Yo-rzQ" firstAttribute="leading" secondItem="YPy-tu-Le6" secondAttribute="leading" constant="10" id="cbf-nh-Hta"/>
                                                         <constraint firstItem="emk-fw-8zA" firstAttribute="leading" secondItem="YPy-tu-Le6" secondAttribute="leading" constant="30" id="gaM-TO-u1m"/>
                                                         <constraint firstItem="emk-fw-8zA" firstAttribute="top" secondItem="YPy-tu-Le6" secondAttribute="top" constant="20" id="myX-Rx-ANE"/>
-                                                        <constraint firstItem="EIl-sr-kSD" firstAttribute="top" secondItem="iS7-Yo-rzQ" secondAttribute="bottom" constant="10" id="osK-xs-gRV"/>
+                                                        <constraint firstItem="EIl-sr-kSD" firstAttribute="top" secondItem="iS7-Yo-rzQ" secondAttribute="bottom" constant="1" id="osK-xs-gRV"/>
                                                         <constraint firstItem="iML-8a-QA2" firstAttribute="leading" secondItem="YPy-tu-Le6" secondAttribute="leading" constant="25" id="qlH-CS-sn1"/>
                                                     </constraints>
                                                 </view>
@@ -6693,7 +6681,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kyH-xI-qpc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="8440.5" y="66"/>
+            <point key="canvasLocation" x="8438.4057971014499" y="65.217391304347828"/>
         </scene>
         <!--Search Friends View Controller-->
         <scene sceneID="rrY-Ev-AW7">
@@ -9519,7 +9507,6 @@
         <image name="checkbox" width="25" height="25"/>
         <image name="contact" width="24" height="24"/>
         <image name="contacts" width="50" height="50"/>
-        <image name="delete" width="40" height="40"/>
         <image name="email" width="48" height="48"/>
         <image name="event" width="22" height="22"/>
         <image name="facebook" width="48" height="48"/>

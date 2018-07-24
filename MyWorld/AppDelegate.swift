@@ -250,12 +250,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate,GIDSignInDelegate,SWReveal
     
 
     func registerForPushNotifications() {
+        
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) {
             (granted, error) in
             print("Permission granted: \(granted)")
             
             guard granted else { return }
             self.getNotificationSettings()
+        }
+        if #available(iOS 10.0, *){
+            UNUserNotificationCenter.current().delegate = self as? UNUserNotificationCenterDelegate
+            UIApplication.shared.applicationIconBadgeNumber = 0
+            
+        }
+        else {
+            let settings: UIUserNotificationSettings = UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil); UIApplication.shared.registerUserNotificationSettings(settings)
         }
     }
     

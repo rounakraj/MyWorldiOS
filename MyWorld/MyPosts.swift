@@ -319,7 +319,7 @@ class MyPosts: UIViewController,UITableViewDataSource,UITableViewDelegate,UINavi
                 
             }else{
                 cell.shareContentBtn.isHidden = false
-                cell.reportContentBtn.isHidden = false
+                cell.reportContentBtn.isHidden = true
                 
             }
             cell.shareContentBtn.addTarget(self, action: #selector(shareContentAction(sender:)), for: .touchUpInside)
@@ -1220,7 +1220,7 @@ class MyPosts: UIViewController,UITableViewDataSource,UITableViewDelegate,UINavi
         dict = shareUpdateArray[(indexPath?.row)!] as! NSDictionary
         
         
-        let alertController = UIAlertController(title: "MyWorld", message: "Send Message", preferredStyle: .alert)
+        let alertController = UIAlertController(title: "MyWorld", message: "Report and Block", preferredStyle: .alert)
         let send = UIAlertAction(title: "Report", style: UIAlertActionStyle.default) { UIAlertAction in
             let textField = alertController.textFields![0]
             print(textField.text!)

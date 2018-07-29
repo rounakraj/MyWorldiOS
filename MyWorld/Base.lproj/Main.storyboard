@@ -9508,12 +9508,15 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ISm-To-PpI">
-                                                    <rect key="frame" x="268" y="40" width="124" height="38"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ISm-To-PpI">
+                                                    <rect key="frame" x="300" y="40" width="67" height="38"/>
                                                     <state key="normal" title="UnBlock"/>
                                                 </button>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailingMargin" secondItem="ISm-To-PpI" secondAttribute="trailing" constant="32" id="4XD-9i-4As"/>
+                                                <constraint firstItem="ISm-To-PpI" firstAttribute="top" secondItem="0l7-fc-Yh5" secondAttribute="topMargin" constant="29" id="k2D-kq-Sb9"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="blockUserImage" destination="3yu-nw-H41" id="pca-5X-wP6"/>
@@ -9538,6 +9541,8 @@
                             <constraint firstItem="gxm-Nu-FKF" firstAttribute="leading" secondItem="rtO-qC-7Op" secondAttribute="leading" id="P5H-9v-UKP"/>
                             <constraint firstItem="gxm-Nu-FKF" firstAttribute="bottom" secondItem="rtO-qC-7Op" secondAttribute="bottom" id="PWj-em-cck"/>
                             <constraint firstItem="gxm-Nu-FKF" firstAttribute="top" secondItem="rtO-qC-7Op" secondAttribute="top" constant="65" id="ccg-oW-xqa"/>
+                            <constraint firstItem="fUC-Ye-Fm8" firstAttribute="trailing" secondItem="rtO-qC-7Op" secondAttribute="trailing" id="g8F-3e-85Z"/>
+                            <constraint firstItem="fUC-Ye-Fm8" firstAttribute="leading" secondItem="rtO-qC-7Op" secondAttribute="leading" id="hZF-Dt-lVt"/>
                             <constraint firstItem="rtO-qC-7Op" firstAttribute="bottom" secondItem="fUC-Ye-Fm8" secondAttribute="bottom" constant="648" id="il9-gR-dPv"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="rtO-qC-7Op"/>

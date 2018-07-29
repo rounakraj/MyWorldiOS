@@ -88,6 +88,8 @@ class SellUiViewController: UIViewController,UICollectionViewDelegate,UICollecti
 
 
     func validateSell() {
+        let UserId = UserDefaults.standard.value(forKey: "userId") as? String
+
         SVProgressHUD.show(withStatus: "Loading")
         let urlToRequest = WEBSERVICE_URL+"getnearbyProduct.php"
         let url4 = URL(string: urlToRequest)!
@@ -95,7 +97,9 @@ class SellUiViewController: UIViewController,UICollectionViewDelegate,UICollecti
         let request = NSMutableURLRequest(url: url4)
         request.httpMethod = "POST"
         request.cachePolicy = NSURLRequest.CachePolicy.reloadIgnoringCacheData
-        let paramString="userLat="+"28.7041"+"&"+"userLong="+"77.1025"
+        let paramString="userLat="+"28.7041"+"&"+"userLong="+"77.1025"+"&"+"userId="+UserId!
+
+    
         request.httpBody = paramString.data(using: String.Encoding.utf8)
         let task = session4.dataTask(with: request as URLRequest) { (data, response, error) in
             guard let _: Data = data, let _: URLResponse = response, error == nil else {

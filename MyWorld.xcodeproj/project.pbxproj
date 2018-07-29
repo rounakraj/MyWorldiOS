@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		0421EF6820F47FB10011712C /* PKCCropViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0421EF6620F47FAD0011712C /* PKCCropViewController.swift */; };
 		0421EF6920F47FB10011712C /* PKCCropViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0421EF6720F47FB10011712C /* PKCCropViewController.xib */; };
+		043DC4BA210CEB8600551D46 /* Block.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043DC4B9210CEB8400551D46 /* Block.swift */; };
+		043DC4BC210CECCE00551D46 /* BlockListVc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043DC4BB210CECCE00551D46 /* BlockListVc.swift */; };
+		043DC4BE210D199C00551D46 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 043DC4BD210D199B00551D46 /* Assets.xcassets */; };
 		04473EC120C3C91F00F162A5 /* EYMaterialActivityIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04473EC020C3C91E00F162A5 /* EYMaterialActivityIndicatorView.m */; };
 		04473EC420C3E69A00F162A5 /* ImagePreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04473EC320C3E69A00F162A5 /* ImagePreviewViewController.m */; };
 		04473ECF20C4182900F162A5 /* PKCCropHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04473EC620C417F300F162A5 /* PKCCropHelper.swift */; };
@@ -32,7 +35,6 @@
 		04BE14EC20D514F000C7B6CF /* SCSiriWaveformView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BE14EA20D514EC00C7B6CF /* SCSiriWaveformView.m */; };
 		04D26C15209F6982008E0C93 /* ChatVideoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D26C14209F6982008E0C93 /* ChatVideoController.m */; };
 		04D8C9A120E76AEE001B62D6 /* termscondition in Resources */ = {isa = PBXBuildFile; fileRef = 04D8C9A020E76AEE001B62D6 /* termscondition */; };
-		04D8C9A320E7B47D001B62D6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04D8C9A220E7B47D001B62D6 /* Assets.xcassets */; };
 		8D8211A520656A3A0061F9A4 /* YMSocialShare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8211A420656A3A0061F9A4 /* YMSocialShare.swift */; };
 		B605AF941FDBE980001774F4 /* RecentChatCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B605AF931FDBE980001774F4 /* RecentChatCollectionViewCell.swift */; };
 		B60858C71FE3A75500373430 /* AdressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60858C61FE3A75500373430 /* AdressViewController.swift */; };
@@ -242,6 +244,9 @@
 /* Begin PBXFileReference section */
 		0421EF6620F47FAD0011712C /* PKCCropViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PKCCropViewController.swift; sourceTree = "<group>"; };
 		0421EF6720F47FB10011712C /* PKCCropViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PKCCropViewController.xib; sourceTree = "<group>"; };
+		043DC4B9210CEB8400551D46 /* Block.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Block.swift; sourceTree = "<group>"; };
+		043DC4BB210CECCE00551D46 /* BlockListVc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockListVc.swift; sourceTree = "<group>"; };
+		043DC4BD210D199B00551D46 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		04473EBF20C3C91B00F162A5 /* EYMaterialActivityIndicatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EYMaterialActivityIndicatorView.h; sourceTree = "<group>"; };
 		04473EC020C3C91E00F162A5 /* EYMaterialActivityIndicatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EYMaterialActivityIndicatorView.m; sourceTree = "<group>"; };
 		04473EC220C3E69A00F162A5 /* ImagePreviewViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImagePreviewViewController.h; sourceTree = "<group>"; };
@@ -279,7 +284,6 @@
 		04D26C13209F6982008E0C93 /* ChatVideoController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChatVideoController.h; sourceTree = "<group>"; };
 		04D26C14209F6982008E0C93 /* ChatVideoController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChatVideoController.m; sourceTree = "<group>"; };
 		04D8C9A020E76AEE001B62D6 /* termscondition */ = {isa = PBXFileReference; lastKnownFileType = text; path = termscondition; sourceTree = "<group>"; };
-		04D8C9A220E7B47D001B62D6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		29F5B3B9406B1C4BBDA5B25E /* Pods-MyWorld.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyWorld.release.xcconfig"; path = "Pods/Target Support Files/Pods-MyWorld/Pods-MyWorld.release.xcconfig"; sourceTree = "<group>"; };
 		3CF53C18FE1B3B6C277124B4 /* Pods_MyWorld.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyWorld.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4264CFD4CFE9410430714E38 /* Pods_MyWorldUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyWorldUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -647,6 +651,7 @@
 				DD24E08220237E8F00D6AE4F /* ProductDetailTVC.swift */,
 				DD24E084202388C200D6AE4F /* ProductDetailCVC.swift */,
 				DDDEB6D7202637A4003C3EE7 /* MyAccountTVC.swift */,
+				043DC4B9210CEB8400551D46 /* Block.swift */,
 			);
 			path = tableVeiwCellClass;
 			sourceTree = "<group>";
@@ -778,8 +783,8 @@
 				B6F28F531FD5266E00E6933C /* File.swift */,
 				DD2D74B62045A39300EC39CF /* GoogleService-Info.plist */,
 				B62CCADF1FD6C25F001F9100 /* MyWorld-Bridging-Header.h */,
+				043DC4BD210D199B00551D46 /* Assets.xcassets */,
 				B611C1BB1FDAA1F100E8DB8C /* Theam.xcassets */,
-				04D8C9A220E7B47D001B62D6 /* Assets.xcassets */,
 				04D8C9A020E76AEE001B62D6 /* termscondition */,
 			);
 			path = MyWorld;
@@ -858,6 +863,7 @@
 				B65DCBCC200619BB00DEBC52 /* NewPostViewController.swift */,
 				DD2F7FA72030ABDB0099567E /* CardInformationVc.swift */,
 				DD2961FC205308CD00FA08B8 /* PaymentDetailData.swift */,
+				043DC4BB210CECCE00551D46 /* BlockListVc.swift */,
 			);
 			path = class;
 			sourceTree = "<group>";
@@ -1056,7 +1062,7 @@
 				04473ED220C4182900F162A5 /* PKCCropLineView.xib in Resources */,
 				0421EF6920F47FB10011712C /* PKCCropViewController.xib in Resources */,
 				DD2DD17D20020041004F5FE6 /* PlayerView.xib in Resources */,
-				04D8C9A320E7B47D001B62D6 /* Assets.xcassets in Resources */,
+				043DC4BE210D199C00551D46 /* Assets.xcassets in Resources */,
 				B6F28F251FD521FC00E6933C /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1193,6 +1199,8 @@
 				B6899A211FE10A31007F6B38 /* SubCategoryResourse.swift in Sources */,
 				B65464991FFFB8CC00B7430E /* OrderList.swift in Sources */,
 				B64C18C62004C785002BFB5D /* OnlineFriendsCollectionViewCell.swift in Sources */,
+				043DC4BC210CECCE00551D46 /* BlockListVc.swift in Sources */,
+				043DC4BA210CEB8600551D46 /* Block.swift in Sources */,
 				B6B6DF152007E958007B03BA /* FollowingViewController.swift in Sources */,
 				DD2DF1AB2001423400F5532D /* HPTextViewInternal.m in Sources */,
 				B6899A1D1FE0FB38007F6B38 /* BrowseSubCategoryViewController.swift in Sources */,
@@ -1538,7 +1546,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = MyWorld/MyWorld.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Kumar Rounak (SK476XA3Y7)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = THC6677W2Z;
@@ -1572,7 +1580,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = MyWorld/MyWorld.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Kumar Rounak (SK476XA3Y7)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Kumar Rounak (THC6677W2Z)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = THC6677W2Z;

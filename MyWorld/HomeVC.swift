@@ -384,16 +384,18 @@ class HomeVC: UIViewController ,UITableViewDataSource,UITableViewDelegate{
         
         task.resume()
     }
-    
-    
+
     func validateNearbyProduct() {
+        let UserId = UserDefaults.standard.value(forKey: "userId") as? String
         let urlToRequest = WEBSERVICE_URL+"getnearbyProduct.php"
         let url4 = URL(string: urlToRequest)!
         let session4 = URLSession.shared
         let request = NSMutableURLRequest(url: url4)
         request.httpMethod = "POST"
         request.cachePolicy = NSURLRequest.CachePolicy.reloadIgnoringCacheData
-        let paramString="userLat="+"28.7041"+"&"+"userLong="+"77.1025"
+        let paramString="userLat="+"28.7041"+"&"+"userLong="+"77.1025"+"&"+"userId="+UserId!
+
+       
         request.httpBody = paramString.data(using: String.Encoding.utf8)
         let task = session4.dataTask(with: request as URLRequest) { (data, response, error) in
             guard let _: Data = data, let _: URLResponse = response, error == nil else {
@@ -516,7 +518,6 @@ class HomeVC: UIViewController ,UITableViewDataSource,UITableViewDelegate{
                 let Data = try JSONSerialization.jsonObject(with: data!) as! [String:Any]
                 print("*****Response \(String(describing: Data))") //JSONSerialization
                 
-                let  messageFromServer = Data["responseMessage"] as? String
                 let responseCode=Data["responseCode"] as? String
                 let checkcode="200"
                 if responseCode==checkcode{

@@ -313,14 +313,13 @@ class MyPosts: UIViewController,UITableViewDataSource,UITableViewDelegate,UINavi
                 cell.updateDate.text = ""
             }
             let userFile = detailsDict.object(forKey: "userFile") as! String
-            
-            if userFile.isEmpty{
+            if userFile.isEmpty {
                 cell.shareContentBtn.isHidden = true
                 cell.reportContentBtn.isHidden = true
                 
             }else{
                 cell.shareContentBtn.isHidden = false
-                cell.reportContentBtn.isHidden = true
+                cell.reportContentBtn.isHidden = false
                 
             }
             cell.shareContentBtn.addTarget(self, action: #selector(shareContentAction(sender:)), for: .touchUpInside)
@@ -437,7 +436,7 @@ class MyPosts: UIViewController,UITableViewDataSource,UITableViewDelegate,UINavi
             }
             let userFile = dict.object(forKey: "userFile") as! String
             
-            if userFile.isEmpty{
+            if userFile.isEmpty {
                 cell.shareContentBtn.isHidden = true
                 cell.reportContentBtn.isHidden = true
                 
@@ -568,17 +567,20 @@ class MyPosts: UIViewController,UITableViewDataSource,UITableViewDelegate,UINavi
             else{
                  cell.updateDate.text = ""
             }
+           
+            
+            
             let globalFile = dict.object(forKey: "globalFile") as! String
-
-            if globalFile.isEmpty{
+            if globalFile.isEmpty {
                 cell.shareContentBtn.isHidden = true
                 cell.reportContentBtn.isHidden = true
 
             }else{
-                cell.shareContentBtn.isHidden = false
-                cell.reportContentBtn.isHidden = false
-
+               cell.shareContentBtn.isHidden = false
+               cell.reportContentBtn.isHidden = false
             }
+        
+    
             cell.shareContentBtn.addTarget(self, action: #selector(shareContentAction(sender:)), for: .touchUpInside)
             
             cell.reportContentBtn.addTarget(self, action: #selector(sendMessage(sender:)), for: .touchUpInside)
@@ -1219,7 +1221,7 @@ class MyPosts: UIViewController,UITableViewDataSource,UITableViewDelegate,UINavi
         
         
         let alertController = UIAlertController(title: "MyWorld", message: "Send Message", preferredStyle: .alert)
-        let send = UIAlertAction(title: "Send", style: UIAlertActionStyle.default) { UIAlertAction in
+        let send = UIAlertAction(title: "Report", style: UIAlertActionStyle.default) { UIAlertAction in
             let textField = alertController.textFields![0]
             print(textField.text!)
             if !self.isKeyboardDismiss && textField.text!.count > 0{
@@ -1233,7 +1235,14 @@ class MyPosts: UIViewController,UITableViewDataSource,UITableViewDelegate,UINavi
                 self.isKeyboardDismiss = false
             }
         }
+        let block = UIAlertAction(title: "Report & Block", style: UIAlertActionStyle.default) { UIAlertAction in
+            let block_user_id = dict.object(forKey: "userId") as! String!
+            let dic = ["login_user_id" : UserDefaults.standard.string(forKey: "userId")!,
+                       "block_user_id" : block_user_id!]
+            self.sendDataToServerUsingWrongContent(param:dic)
+        }
         alertController.addAction(send)
+        alertController.addAction(block)
         
         alertController .addTextField { (textField) in
             textField.placeholder = "message"

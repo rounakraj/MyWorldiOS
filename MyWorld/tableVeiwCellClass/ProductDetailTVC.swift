@@ -32,6 +32,7 @@ class ProductDetailTVC: UITableViewCell ,UICollectionViewDelegate,UICollectionVi
     @IBOutlet weak var btnFb: UIButton!
     @IBOutlet weak var bottomViewTopConstraint: NSLayoutConstraint!
     
+    @IBOutlet weak var btnReportContent: UIButton!
     @IBOutlet weak var btnTwiter: UIButton!
 
     @IBOutlet weak var btnWhatsApp: UIButton!

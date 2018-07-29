@@ -1,20 +1,20 @@
 //
-//  MyAccountTVC.swift
+//  Block.swift
 //  MyWorld
 //
-//  Created by Shankar Kumar on 04/02/18.
+//  Created by mac on 28/07/18.
 //  Copyright © 2018 MyWorld. All rights reserved.
 //
 
 import UIKit
 
-class MyAccountTVC: UITableViewCell {
-    @IBOutlet weak var switchBtn: UISwitch!
-    @IBOutlet weak var blockUnBlockBtn: UILabel!
-    @IBOutlet weak var blockSwitchBtn: UISwitch!
-    @IBOutlet weak var reportSwitchBtn: UISwitch!
+class Block: UITableViewCell {
+
+    @IBOutlet weak var blockUserImage: UIImageView!
     
-    
+    @IBOutlet weak var btnUnblock: UIButton!
+    @IBOutlet weak var blockUserStutas: UILabel!
+    @IBOutlet weak var blockUserName: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

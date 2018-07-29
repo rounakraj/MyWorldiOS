@@ -101,7 +101,7 @@ class ProfileViewController: UIViewController,UITableViewDataSource,UITableViewD
     // MARK: - Table view data source
     func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return self.userId == UserDefaults.standard.value(forKey: "userId") as! String ? 6:7 //6:8
+        return self.userId == UserDefaults.standard.value(forKey: "userId") as! String ? 7:7 //6:8
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -137,6 +137,9 @@ class ProfileViewController: UIViewController,UITableViewDataSource,UITableViewD
                 cell = (tableView.dequeueReusableCell(withIdentifier: "cell6", for: indexPath) as! MyAccountTVC)
             }
             else if indexPath.section == 5 {
+                cell = (tableView.dequeueReusableCell(withIdentifier: "cell8", for: indexPath) as! MyAccountTVC)
+            }
+            else if indexPath.section == 6 {
                 cell = (tableView.dequeueReusableCell(withIdentifier: "cell7", for: indexPath) as! MyAccountTVC)
             }
         }
@@ -214,6 +217,13 @@ class ProfileViewController: UIViewController,UITableViewDataSource,UITableViewD
                 self.navigationController?.pushViewController(desCV, animated: true)
             }
             if indexPath.section == 5{
+                print("Block")
+                let MainStoryboard:UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+                let desCV = MainStoryboard.instantiateViewController(withIdentifier: "BlockListVc") as! BlockListVc
+                self.navigationController?.pushViewController(desCV, animated: true)
+            }
+            
+            if indexPath.section == 6{
                 print("Logout")
                 UserDefaults.standard.removeObject(forKey: "userId")
                 let MainStoryboard:UIStoryboard = UIStoryboard(name: "Main", bundle:nil)

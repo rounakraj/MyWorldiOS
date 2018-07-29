@@ -11,11 +11,16 @@ import Social
 import Alamofire
 import SVProgressHUD
 
-class ProducatViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,UIPickerViewDataSource,UIPickerViewDelegate{
+class ProducatViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,UIPickerViewDataSource,UIPickerViewDelegate,UITextFieldDelegate{
     
     @IBOutlet weak var checkCheckde: UIButton!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var btnAddtoCart: UIButton!
+    
+    @IBOutlet weak var btnChat: UIButton!
+    @IBOutlet weak var reportButton: UIButton!
+    var isKeyboardDismiss:Bool = false
+
     @IBOutlet weak var productImagesHeaderView: UIView!
     private var productlist = [ProductDetailsList]()
     private var productlist1 = [DetailsProdcat]()
@@ -55,11 +60,12 @@ class ProducatViewController: UIViewController,UITableViewDelegate,UITableViewDa
         if getuserName == "Myworld"{
              btnAddtoCart.isEnabled = true
              btnAddtoCart.setTitle("Add to Cart", for: .normal)
-             //btnMakeAnOffer.isHidden = true
+            btnChat.setTitle("Chat", for: .normal)
+
         }else{
-            //btnMakeAnOffer.isHidden = false
+             btnChat.setTitle("Block User", for: .normal)
              btnAddtoCart.isEnabled = true
-            btnAddtoCart.setTitle("Make an Offer", for: .normal)
+             btnAddtoCart.setTitle("Make an Offer/Chat", for: .normal)
         }
     }
     
@@ -101,17 +107,7 @@ class ProducatViewController: UIViewController,UITableViewDelegate,UITableViewDa
        
     }
     
-    @IBAction func btnMakeAnOffer(_ sender: Any) {
-        
-        let MainStoryboard:UIStoryboard = UIStoryboard(name: "Main1", bundle:nil)
-        let controller = MainStoryboard.instantiateViewController(withIdentifier: "ChatViewController") as! ChatViewController
-        controller.userId2 = userIdChat
-        controller.emailID = emailId
-        self.navigationController?.pushViewController(controller, animated: true)
-        
-    }
-    
-    
+  
     @IBAction func btnWishlist(_ sender: Any) {
         
         if isBoxclickde == true{
@@ -132,7 +128,7 @@ class ProducatViewController: UIViewController,UITableViewDelegate,UITableViewDa
         }
     }
     
-    
+  
     @IBAction func btnChat(_sender: Any){
      
         if getuserName == "Myworld"
@@ -141,14 +137,21 @@ class ProducatViewController: UIViewController,UITableViewDelegate,UITableViewDa
             let controller = MainStoryboard.instantiateViewController(withIdentifier: "AdminChatVC") as! AdminChatVC
             self.navigationController?.pushViewController(controller, animated: true)
         }else {
+            if btnChat.currentTitle == "Block"{
+                
+                let dic = ["login_user_id" : UserDefaults.standard.string(forKey: "userId")!,"block_user_id" : self.userIdChat]  as [String : Any]
+                self.sendDataToServerUsingWrongContent(param:dic)
+                
+            }else{
+                let MainStoryboard:UIStoryboard = UIStoryboard(name: "Main1", bundle:nil)
+                let controller = MainStoryboard.instantiateViewController(withIdentifier: "ChatViewController") as! ChatViewController
+                controller.userId2 = userIdChat
+                controller.emailID = emailId
+                self.navigationController?.pushViewController(controller, animated: true)
+            }
+           
     
-            let MainStoryboard:UIStoryboard = UIStoryboard(name: "Main1", bundle:nil)
-            let controller = MainStoryboard.instantiateViewController(withIdentifier: "ChatViewController") as! ChatViewController
-             controller.userId2 = userIdChat
-             controller.emailID = emailId
-            self.navigationController?.pushViewController(controller, animated: true)
-    
-            
+           
         }
     }
     
@@ -492,6 +495,13 @@ class ProducatViewController: UIViewController,UITableViewDelegate,UITableViewDa
         if indexPath.section == 0 {
             cell = tableView.dequeueReusableCell(withIdentifier: "cell0", for: indexPath) as! ProductDetailTVC
             cell.updateCollection(array: images)
+            if getuserName == "Myworld"{
+                cell.btnReportContent.isHidden = true
+            }else{
+                cell.btnReportContent.isHidden = false
+                cell.btnReportContent.addTarget(self, action: #selector(sendMessage(sender:)), for: .touchUpInside)
+            }
+            
         }
         else if indexPath.section == 1 {
             cell = tableView.dequeueReusableCell(withIdentifier: "cell1", for: indexPath) as! ProductDetailTVC
@@ -629,50 +639,7 @@ class ProducatViewController: UIViewController,UITableViewDelegate,UITableViewDa
         }
         return UIImage()
     }
-    
-    /*@objc func whatsAppAction(sender: UIButton) -> Void {
-        let buttonPosition:CGPoint = sender.convert(CGPoint.zero, to:self.tableView)
-        let indexPath = self.tableView.indexPathForRow(at: buttonPosition)
-        let urlString = "Sending WhatsApp message through app in Swift"
-        let urlStringEncoded = urlString.addingPercentEncoding( withAllowedCharacters: .urlQueryAllowed)
-        let url  = NSURL(string: "whatsapp://send?text=\(urlStringEncoded!)")
-        
-        if UIApplication.shared.canOpenURL(url! as URL) {
-            UIApplication.shared.openURL(url! as URL)
-        } else {
-            let errorAlert = UIAlertView(title: "Cannot Send Message", message: "Your device is not able to send WhatsApp messages.", delegate: self, cancelButtonTitle: "OK")
-            errorAlert.show()
-        }
-    }
-    
-    @objc func facebookAction(sender: UIButton) -> Void {
-        let buttonPosition:CGPoint = sender.convert(CGPoint.zero, to:self.tableView)
-        let indexPath = self.tableView.indexPathForRow(at: buttonPosition)
-        if SLComposeViewController.isAvailable(forServiceType: SLServiceTypeFacebook){
-            let facebookSheet:SLComposeViewController = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
-            facebookSheet.setInitialText("Share on Facebook")
-            self.present(facebookSheet, animated: true, completion: nil)
-        } else {
-            
-            let alert = UIAlertController(title: "Accounts", message: "Please login to a Facebook account to share.", preferredStyle: UIAlertControllerStyle.alert)
-            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
-            self.present(alert, animated: true, completion: nil)
-        }
-    }
-    
-    @objc func twitterAction(sender: UIButton) -> Void {
-        let buttonPosition:CGPoint = sender.convert(CGPoint.zero, to:self.tableView)
-        let indexPath = self.tableView.indexPathForRow(at: buttonPosition)
-        if SLComposeViewController.isAvailable(forServiceType: SLServiceTypeTwitter){
-            let twitterSheet:SLComposeViewController = SLComposeViewController(forServiceType: SLServiceTypeTwitter)
-            twitterSheet.setInitialText("Share on Twitter")
-            self.present(twitterSheet, animated: true, completion: nil)
-        } else {
-            let alert = UIAlertController(title: "Accounts", message: "Please login to a Twitter account to share.", preferredStyle: UIAlertControllerStyle.alert)
-            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
-            self.present(alert, animated: true, completion: nil)
-        }
-    }*/
+
     
     @objc func viewProfileAction(sender: UIButton) -> Void {
        
@@ -729,6 +696,108 @@ class ProducatViewController: UIViewController,UITableViewDelegate,UITableViewDa
         lastQty = selectedQty
         self.tableView.reloadData()
         self.view.endEditing(true)
+    }
+    
+    @objc func alertClose(gesture: UITapGestureRecognizer) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.isKeyboardDismiss = true
+        self.view.endEditing(true)
+        return true
+    }
+    
+    @objc func sendMessage(sender: UIButton){
+        let alertController = UIAlertController(title: "MyWorld", message: "Report Content", preferredStyle: .alert)
+        let send = UIAlertAction(title: "Report", style: UIAlertActionStyle.default) { UIAlertAction in
+            let textField = alertController.textFields![0]
+            print(textField.text!)
+            if !self.isKeyboardDismiss && textField.text!.count > 0{
+                let dic = ["login_user_id" : UserDefaults.standard.string(forKey: "userId")!,
+                           "block_user_id" : self.userIdChat,
+                           "report" : "1",
+                           "report_text" : textField.text!]  as [String : Any]
+                self.sendDataToServerUsingWrongContent(param:dic)
+            }
+            else{
+                self.isKeyboardDismiss = false
+            }
+        }
+        alertController.addAction(send)
+        
+        alertController .addTextField { (textField) in
+            textField.placeholder = "message"
+            textField.keyboardType = .default
+            textField.delegate = self 
+        }
+        self.present(alertController, animated: true, completion:{
+            alertController.view.superview?.isUserInteractionEnabled = true
+            alertController.view.superview?.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(ProducatViewController.alertClose(gesture:))))
+        })
+    }
+    func sendDataToServerUsingWrongContent(param:[String:Any]){
+        
+        SVProgressHUD.show(withStatus: "Loading")
+        
+        Alamofire.upload(multipartFormData: { (multipartFormData) in
+            
+            for (key, value) in param {
+                
+                multipartFormData.append(((value as AnyObject).data(using: String.Encoding.utf8.rawValue)!), withName: key )
+                
+            }
+            
+        }, to: WEBSERVICE_URL + "blockAndReport.php")
+        { (result) in
+            switch result {
+            case .success(let upload, _, _):
+                
+                upload.uploadProgress(closure: { (progress) in
+                    //Print progress
+                    print("progress \(progress) " )
+                    
+                })
+                
+                upload.responseJSON { response in
+                    //print response.result
+                    print("response data \(response) " )
+                    let jsonResponse = response.result.value as! NSDictionary
+                    if jsonResponse.value(forKey: "responseCode") as! String == "200"{
+                        let alertController = UIAlertController(title: "Block and Report", message: jsonResponse.value(forKey: "responseMessage") as? String, preferredStyle: .alert)
+                        SVProgressHUD.dismiss()
+                        let ok = UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in
+                            // Do whatever you want with inputTextField?.text
+                            let MainStoryboard:UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+                            let desCV = MainStoryboard.instantiateViewController(withIdentifier: "HomeVC") as! HomeVC
+                            self.navigationController?.pushViewController(desCV, animated: true)
+                        })
+                        alertController.addAction(ok)
+                        self.present(alertController, animated: true, completion: nil)
+                        
+                    }else{
+                        DispatchQueue.main.async(execute: {
+                            let alertController = UIAlertController(title: "Block and Report", message: jsonResponse.value(forKey: "responseMessage") as? String, preferredStyle: .alert)
+                            SVProgressHUD.dismiss()
+                            let ok = UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in
+                                // Do whatever you want with inputTextField?.text
+                                self.navigationController?.popViewController(animated:true)
+                            })
+                            alertController.addAction(ok)
+                            self.present(alertController, animated: true, completion: nil)
+                        })
+                    }
+                    
+                }
+                
+            case .failure( _):
+                SVProgressHUD.dismiss()
+                break
+                //print encodingError.description
+                
+            }
+        }
     }
    
 }

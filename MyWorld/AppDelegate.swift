@@ -1,4 +1,4 @@
-//
+ //
 //  AppDelegate.swift
 //  MyWorld
 //
@@ -141,8 +141,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate,GIDSignInDelegate,SWReveal
         let request = NSMutableURLRequest(url: url4)
         request.httpMethod = "POST"
         request.cachePolicy = NSURLRequest.CachePolicy.reloadIgnoringCacheData
+        print(UserDefaults.standard.string(forKey: "deviceToken"))
         let paramString="device=ios"+"&fullName="+fullName+"&"+"emailId="+emailId+"&"+"image="+image+"&"+"deviceId=" + ( UserDefaults.standard.string(forKey: "deviceToken") ?? "")
+      
         request.httpBody = paramString.data(using: String.Encoding.utf8)
+        
         let task = session4.dataTask(with: request as URLRequest) { (data, response, error) in
             guard let _: Data = data, let _: URLResponse = response, error == nil else {
                 print("*****error")

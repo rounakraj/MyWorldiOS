@@ -234,15 +234,15 @@ class BuyItemListViewController: UIViewController,UICollectionViewDelegate,UICol
     
     
     func validatePopularProduct() {
+        let UserId = UserDefaults.standard.value(forKey: "userId") as? String
         SVProgressHUD.show(withStatus: "Loading")
-        
         let urlToRequest = WEBSERVICE_URL+"getpopularProduct.php"
         let url4 = URL(string: urlToRequest)!
         let session4 = URLSession.shared
         let request = NSMutableURLRequest(url: url4)
         request.httpMethod = "POST"
         request.cachePolicy = NSURLRequest.CachePolicy.reloadIgnoringCacheData
-        let paramString=""
+        let paramString="userId="+UserId!
         request.httpBody = paramString.data(using: String.Encoding.utf8)
         let task = session4.dataTask(with: request as URLRequest) { (data, response, error) in
             guard let _: Data = data, let _: URLResponse = response, error == nil else {
@@ -291,15 +291,16 @@ class BuyItemListViewController: UIViewController,UICollectionViewDelegate,UICol
     
     
     func validateDeals() {
+        let UserId = UserDefaults.standard.value(forKey: "userId") as? String
+
         SVProgressHUD.show(withStatus: "Loading")
-        
         let urlToRequest = WEBSERVICE_URL+"getProduct.php"
         let url4 = URL(string: urlToRequest)!
         let session4 = URLSession.shared
         let request = NSMutableURLRequest(url: url4)
         request.httpMethod = "POST"
         request.cachePolicy = NSURLRequest.CachePolicy.reloadIgnoringCacheData
-        let paramString=""
+        let paramString="userId="+UserId!
         request.httpBody = paramString.data(using: String.Encoding.utf8)
         let task = session4.dataTask(with: request as URLRequest) { (data, response, error) in
             guard let _: Data = data, let _: URLResponse = response, error == nil else {
@@ -353,15 +354,15 @@ class BuyItemListViewController: UIViewController,UICollectionViewDelegate,UICol
     
     
     func validateTrendingProduct() {
+        let UserId = UserDefaults.standard.value(forKey: "userId") as? String
         SVProgressHUD.show(withStatus: "Loading")
-        
         let urlToRequest = WEBSERVICE_URL+"gettrendingProduct.php"
         let url4 = URL(string: urlToRequest)!
         let session4 = URLSession.shared
         let request = NSMutableURLRequest(url: url4)
         request.httpMethod = "POST"
         request.cachePolicy = NSURLRequest.CachePolicy.reloadIgnoringCacheData
-        let paramString=""
+        let paramString="userId="+UserId!
         request.httpBody = paramString.data(using: String.Encoding.utf8)
         let task = session4.dataTask(with: request as URLRequest) { (data, response, error) in
             guard let _: Data = data, let _: URLResponse = response, error == nil else {

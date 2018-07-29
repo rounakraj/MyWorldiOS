@@ -137,7 +137,7 @@ class ProducatViewController: UIViewController,UITableViewDelegate,UITableViewDa
             let controller = MainStoryboard.instantiateViewController(withIdentifier: "AdminChatVC") as! AdminChatVC
             self.navigationController?.pushViewController(controller, animated: true)
         }else {
-            if btnChat.currentTitle == "Block"{
+            if btnChat.currentTitle == "Block User"{
                 
                 let dic = ["login_user_id" : UserDefaults.standard.string(forKey: "userId")!,"block_user_id" : self.userIdChat]  as [String : Any]
                 self.sendDataToServerUsingWrongContent(param:dic)
